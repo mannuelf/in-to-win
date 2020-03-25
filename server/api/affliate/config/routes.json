@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/affliates",
+      "handler": "Affliate.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/affliates/count",
+      "handler": "Affliate.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/affliates/:id",
+      "handler": "Affliate.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/affliates",
+      "handler": "Affliate.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/affliates/:id",
+      "handler": "Affliate.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/affliates/:id",
+      "handler": "Affliate.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

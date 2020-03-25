@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "customertasks",
+  "info": {
+    "name": "customertask",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "customerid": {
+      "type": "string"
+    },
+    "taskid": {
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    }
+  }
+}

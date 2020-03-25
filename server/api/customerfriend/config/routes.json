@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/customerfriends",
+      "handler": "Customerfriend.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customerfriends/count",
+      "handler": "Customerfriend.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customerfriends/:id",
+      "handler": "Customerfriend.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/customerfriends",
+      "handler": "Customerfriend.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/customerfriends/:id",
+      "handler": "Customerfriend.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/customerfriends/:id",
+      "handler": "Customerfriend.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

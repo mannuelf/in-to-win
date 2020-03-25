@@ -1,0 +1,21 @@
+{
+  "connection": "default",
+  "collectionName": "pfmoduleonequestionones",
+  "info": {
+    "name": "pfmoduleonequestionone",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "input": {
+      "type": "string"
+    },
+    "output": {
+      "type": "string"
+    }
+  }
+}

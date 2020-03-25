@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/customertasks",
+      "handler": "Customertask.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customertasks/count",
+      "handler": "Customertask.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/customertasks/:id",
+      "handler": "Customertask.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/customertasks",
+      "handler": "Customertask.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/customertasks/:id",
+      "handler": "Customertask.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/customertasks/:id",
+      "handler": "Customertask.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

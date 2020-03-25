@@ -1,0 +1,44 @@
+{
+  "connection": "default",
+  "collectionName": "customers",
+  "info": {
+    "name": "customer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": [
+      "created_at",
+      "updated_at"
+    ],
+    "comment": ""
+  },
+  "attributes": {
+    "first": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "profileImage": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload"
+    },
+    "password": {
+      "type": "password"
+    },
+    "lat": {
+      "type": "string"
+    },
+    "long": {
+      "type": "string"
+    },
+    "profileMessage": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "connection": "default",
+  "collectionName": "customerfriends",
+  "info": {
+    "name": "customerfriend",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "friendid": {
+      "type": "string"
+    },
+    "customerid": {
+      "type": "string"
+    }
+  }
+}
