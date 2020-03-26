@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
+import brain from "brain.js";
 
 function AskCoronaGo() {
+  const [coronaQuery, setCoronaQuery] = useState("");
+  const [theAnswer, setTheAnswer] = useState("");
   let trainedNet;
 
   const encode = arg => {
@@ -11,7 +14,6 @@ function AskCoronaGo() {
     }
     return input;
   };
-
   const fixLengths = data => {
     let maxLengthInput = -1;
     for (let i = 0; i < data.length; i++) {
@@ -28,37 +30,66 @@ function AskCoronaGo() {
   };
 
   function train() {
-    fetch("https://cors-anywhere.herokuapp.com/http://34.243.84.61/coronafacts")
+    fetch(BASE_URL + CORONA_FACTS)
       .then(response => {
         return response.json();
       })
       .then(result => {
         let filteredResult = result.map(value => {
           let outputObj = {};
-          let key = value.output;
+          let key = value.isTrue;
           outputObj[key] = 1;
           return {
-            input: encode(value.input),
+            input: encode(value.text),
             output: outputObj
           };
         });
         let fixedData = fixLengths(filteredResult);
-        console.log("filteredResult ", fixedData);
         let net = new brain.NeuralNetwork();
         net.train(fixedData, {
-          iterations: 500,
+          iterations: 200,
           log: true
         });
         trainedNet = net.toFunction();
         console.log("Finished training...");
-        let answer = execute(document.getElementById("answer").value);
-        document.getElementById("theResult").innerHTML = answer;
+        let answer = execute(coronaQuery);
+        setTheAnswer(answer);
+        //document.getElementById("theResult").innerHTML = answer;
       });
   }
+
+  const execute = input => {
+    let results = trainedNet(encode(input));
+    let output = results.true > results.false ? "true" : "false";
+    console.log(output);
+    // let output;
+    // results.true > results.false
+    //   ? (output = `<h3> The answer is <b>correct</b> <span class="glyphicon glyphicon-ok" aria-hidden="true"></h3></div>`)
+    //   : (output = `<h3>The answer is <b>incorrect</b> <span class="glyphicon glyphicon-remove" aria-hidden="true"></h3></div>`);
+    // return output;
+  };
+
+  const handleChange = input => {
+    setCoronaQuery(input.target.value);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    train();
+  };
 
   return (
     <div className="App">
       <h1>Get your facts straight about the Corona virus</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="coronaQuestion"
+          className=""
+          onChange={handleChange}
+        />
+        <input type="submit" />
+      </form>
     </div>
   );
 }

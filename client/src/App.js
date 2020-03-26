@@ -23,6 +23,7 @@ function App({ children }) {
         <div>
           <Link to="/">Home</Link>
           <Link to="/affliates">Affliates</Link>
+          <Link to="/ask-corona-go">Get your facts straight</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
         </div>
