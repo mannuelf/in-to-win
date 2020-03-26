@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import React, { useState } from "react";
+import Login from "./pages/Login";
+import { Link } from "react-router-dom";
+import "./App.scss";
 
-function App() {
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<img src={logo} className='App-logo' alt='logo' />
-				<p>
-					Edit <code>src/App.js</code> and save to reload.
-				</p>
-				<a
-					className='App-link'
-					href='https://reactjs.org'
-					target='_blank'
-					rel='noopener noreferrer'
-				>
-					Learn React
-				</a>
-			</header>
-		</div>
-	);
+function App({ children }) {
+  const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const handleLogin = () => {
+    setisUserLoggedIn(true);
+  };
+  const handleErrors = () => {
+    setErrorMessage("Please check your credentials");
+  };
+  const handleLogout = () => {
+    sessionStorage.clear();
+    setisUserLoggedIn(false);
+  };
+
+  return (
+    <div className="App">
+      {isUserLoggedIn && sessionStorage.getItem("JWT") !== null ? (
+        <div>
+          <Link to="/">Home</Link>
+          <Link to="/affliates">Affliates</Link>
+          <button onClick={handleLogout}>Logout</button>
+          {children}
+        </div>
+      ) : (
+        <div>
+          <p>{errorMessage}</p>
+          <Login updateLoginStatus={handleLogin} updateErrors={handleErrors} />
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default App;
