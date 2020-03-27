@@ -30,11 +30,11 @@ function SocialSearch() {
 
   const handleFollow = friendid => {
     let user = JSON.parse(sessionStorage.getItem("User"));
-    console.log(user);
+    console.log(friendid.toString(), user.id.toString());
     axios
       .post(BASE_URL + CUSTOMER_FRIENDS, {
-        friendid: friendid.toString(),
-        userid: user.id.toString()
+        friendNumber: friendid.toString(),
+        userNumber: user.id.toString()
       })
       .then(response => {
         console.log(response.data);

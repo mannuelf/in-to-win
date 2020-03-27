@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+
 import Login from "./pages/Login";
+
 import { Link } from "react-router-dom";
 
 function App({ children }) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
   const handleLogin = () => {
     setisUserLoggedIn(true);
   };
