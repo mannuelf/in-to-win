@@ -48,10 +48,14 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
-          <Button primary color="orange">
-            Log in
-          </Button>
-          <input type="submit" name="submit" />
+          <Button
+            as="input"
+            primary
+            wide
+            type="submit"
+            name="submit"
+            value="Log in"
+          />
         </form>
       </div>
     </div>
