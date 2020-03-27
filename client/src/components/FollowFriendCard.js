@@ -1,14 +1,14 @@
 import React from "react";
 import FollowButton from "./common/FollowButton";
 
-function FollowFriendCard({ image, name, score, onClick }) {
+function FollowFriendCard({ image, name, score, onClick, id }) {
   return (
     <div className="follow-friend-card" style={style_FFC}>
       <img src={image} alt={name} style={style_IMG} />
       <div className="score">
         Score: <span className="yellow-dark-text-">{score}</span>
       </div>
-      <FollowButton onClick={onClick} />
+      <FollowButton id={id} onClick={onClick} />
     </div>
   );
 }

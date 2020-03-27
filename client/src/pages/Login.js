@@ -18,6 +18,7 @@ function Login({ updateErrors, updateLoginStatus }) {
       })
       .then(response => {
         sessionStorage.setItem("JWT", response.data.jwt);
+        sessionStorage.setItem("User", JSON.stringify(response.data.user));
         updateLoginStatus();
       })
       .catch(() => {

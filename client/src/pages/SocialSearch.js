@@ -21,10 +21,12 @@ function SocialSearch() {
         .includes(input.target.value.toLowerCase());
     });
     setFilteredUsers(filteredArray);
+    console.log(filteredArray);
   };
 
-  const handleClick = () => {
-    console.log("Jonmar sucks");
+  const handleClick = friendId => {
+    let user = JSON.parse(sessionStorage.getItem("User"));
+    console.log("Jonmar sucks", friendId);
   };
 
   return (
@@ -44,6 +46,7 @@ function SocialSearch() {
             return (
               <FollowFriendCard
                 key={key}
+                id={value.id}
                 name={value.username}
                 image={img}
                 score={value.points}
