@@ -3,7 +3,7 @@ const theme = {
     bg: "#111923",
     primary: "#FFB444",
     text: "#DADADA",
-    dark: "#3333333"
+    dark: "#333333"
   },
   sizes: {
     small: "16px",
