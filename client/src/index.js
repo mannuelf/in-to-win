@@ -18,7 +18,7 @@ ReactDOM.render(
       <App>
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/affliates" component={Affiliate} />
+          <Route path="/affiliates" component={Affiliate} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
           <Route path="/search-for-a-friend" component={SocialSearch} />
         </Switch>
