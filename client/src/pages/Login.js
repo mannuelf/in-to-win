@@ -47,14 +47,18 @@ function Login({ updateErrors, updateLoginStatus }) {
     flex-direction: column;
   `;
 
+  const ColouredSpan = styled.span`
+
+  `;
+  
   return (
-    <LoginCont>
+    <div>
       <h1>
         InToWin
       </h1>
       <span>The more you in, the more you win.</span>
       <div>
-        <Form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <h2>Username</h2>
           <input
             type="text"
@@ -77,9 +81,9 @@ function Login({ updateErrors, updateLoginStatus }) {
             name="submit"
             value="Log in"
           />
-        </Form>
+        </form>
       </div>
-    </LoginCont>
+    </div>
   );
 }
 
