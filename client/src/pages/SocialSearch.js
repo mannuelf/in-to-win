@@ -10,12 +10,19 @@ function SocialSearch() {
     });
   }, []);
   const handleChange = input => {};
+  const handleFollow = e => {
+    e.target.textContent === "Follow"
+      ? (e.target.textContent = "Unfollow")
+      : (e.target.textContent = "Follow");
+  };
+
   return (
     <div className="App">
       <h1>Search For a Friend</h1>
       <form>
         <input type="text" name="search" className="" onChange={handleChange} />
       </form>
+      <div className="card-deck"></div>
     </div>
   );
 }
