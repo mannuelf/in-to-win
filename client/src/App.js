@@ -25,6 +25,7 @@ function App({ children }) {
           <Link to="/ask-corona-go">Get your facts straight</Link>
           <Link to="/search-for-a-friend">Find a Friend</Link>
           <Link to="/leaderboard">Leaderboard</Link>
+          <Link to="/profile">Profile</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
         </div>
