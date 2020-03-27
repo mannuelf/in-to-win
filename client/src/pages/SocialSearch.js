@@ -30,13 +30,12 @@ function SocialSearch() {
 
   const handleClick = friendid => {
     let user = JSON.parse(sessionStorage.getItem("User"));
-    console.log("Jonmar sucks", user.id);
     axios
       .post(
         "https://cors-anywhere.herokuapp.com/http://34.243.84.61/customerfriends",
         {
-          friendid,
-          userid: user.id
+          friendid: friendid.toString(),
+          userid: user.id.toString()
         }
       )
       .then(response => {
