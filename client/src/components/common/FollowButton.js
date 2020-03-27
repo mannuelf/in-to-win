@@ -3,11 +3,23 @@ import React from "react";
 function FollowButton({ id, onClick }) {
   return (
     <div>
-      <button className="btn yellow-text" onClick={() => onClick(id)}>
+      <button
+        className="btn yellow-text"
+        style={style_button}
+        onClick={() => onClick(id)}
+      >
         Follow
       </button>
     </div>
   );
 }
+
+const style_button = {
+  color: "#FFB444",
+  backgroundColor: "transparent",
+  border: "none",
+  fontSize: "16px",
+  marginTop: "3px"
+};
 
 export default FollowButton;
