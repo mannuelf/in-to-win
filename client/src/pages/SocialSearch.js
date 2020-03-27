@@ -12,10 +12,13 @@ import FollowFriendCard from "../components/FollowFriendCard";
 function SocialSearch() {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [userFriends, setUserFriends] = useState([]);
 
   useEffect(() => {
     axios.get(BASE_URL + USERS).then(results => {
-      setUsers(results.data);
+      axios.get(BASE_URL + CUSTOMER_FRIENDS).then(friendResults => {
+        handleFiltering(results.data, friendResults.data);
+      });
     });
   }, []);
 
@@ -39,6 +42,29 @@ function SocialSearch() {
       .then(response => {
         console.log(response.data);
       });
+  };
+
+  const handleFiltering = (one, two) => {
+    let currentUser = JSON.parse(sessionStorage.getItem("User"));
+    //console.log("handle filtering, users", one);
+    console.log("handle filtering, userFriends", currentUser.id);
+    let removedCurrentUser = one.filter(value => {
+      return value.id !== currentUser.id;
+    });
+    let showAllCurrentUserFriends = two.filter(value => {
+      return value.userNumber === currentUser.id.toString();
+    });
+    let array = removedCurrentUser.filter(item => {
+      return (
+        showAllCurrentUserFriends.filter(item2 => {
+          return item.id.toString() == item2.friendNumber;
+        }).length == 0
+      );
+    });
+
+    setUsers(array);
+
+    console.log(array);
   };
 
   return (
