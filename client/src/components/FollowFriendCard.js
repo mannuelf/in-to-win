@@ -1,12 +1,10 @@
 import React from "react";
 import FollowButton from "./common/FollowButton";
 
-function FollowFriendCard({ image, username, score, onClick }) {
-  console.log(image);
+function FollowFriendCard({ image, username, score, onClick, id }) {
   return (
     <div className="follow-friend-card" style={style_FFC}>
       <img src={image} alt={username} style={style_IMG} />
-      <div style={style_IMG}></div>
       <div style={style_leftColumn}>
         <div className="userName" style={style_username}>
           @{username}
@@ -18,10 +16,11 @@ function FollowFriendCard({ image, username, score, onClick }) {
           </span>
         </div>
       </div>
-      <FollowButton onClick={onClick} />
+      <FollowButton id={id} onClick={onClick} />
     </div>
   );
 }
+
 const style_FFC = {
   display: "flex",
   justifyContent: "space-between",
@@ -55,7 +54,8 @@ const style_username = {
 };
 
 const style_score = {
-  width: "50%"
+  width: "50%",
+  opacity: "70%"
 };
 
 const style_yellowText = {

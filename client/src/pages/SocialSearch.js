@@ -10,7 +10,6 @@ function SocialSearch() {
 
   useEffect(() => {
     axios.get(BASE_URL + USERS).then(results => {
-      console.log(results.data);
       setUsers(results.data);
     });
   }, []);
@@ -22,10 +21,12 @@ function SocialSearch() {
         .includes(input.target.value.toLowerCase());
     });
     setFilteredUsers(filteredArray);
+    console.log(filteredArray);
   };
 
-  const handleClick = () => {
-    console.log("Jonmar sucks");
+  const handleClick = friendId => {
+    let user = JSON.parse(sessionStorage.getItem("User"));
+    console.log("Jonmar sucks", friendId);
   };
 
   return (
@@ -37,15 +38,17 @@ function SocialSearch() {
       <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
+            let img;
+            value.profileimage.length > 0
+              ? (img = IMG_URL + value.profileimage[0].url)
+              : (img =
+                  "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg");
             return (
               <FollowFriendCard
                 key={key}
+                id={value.id}
                 username={value.username}
-                image={
-                  value.profileimage[0]
-                    ? IMG_URL + value.profileimage[0].url
-                    : null
-                }
+                image={img}
                 score={value.points}
                 onClick={handleClick}
               />
