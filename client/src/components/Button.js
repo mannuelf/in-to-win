@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "../GlobalStyle/Theme";
 
 const Button = styled.button`
+  margin-top: 1.6rem;
   padding-left: 24px;
   padding-right: 24px;
   border: ${({ outline }) => (outline ? "2px solid" : "none")};

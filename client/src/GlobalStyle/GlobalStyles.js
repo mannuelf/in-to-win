@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import theme from "./Theme";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -17,7 +18,7 @@ body {
   padding: 0;
   margin: 0;
   height: 100vh;
-
+background-color: ${theme.colors.bg};
 }
 
 a,button, body {
