@@ -34,14 +34,18 @@ function SocialSearch() {
       <form>
         <input type="text" name="search" className="" onChange={handleChange} />
       </form>
-      <div>
+      <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
             return (
               <FollowFriendCard
                 key={key}
-                name={value.username}
-                image={IMG_URL + value.profileimage[0].url}
+                username={value.username}
+                image={
+                  value.profileimage[0]
+                    ? IMG_URL + value.profileimage[0].url
+                    : null
+                }
                 score={value.points}
                 onClick={handleClick}
               />
@@ -54,5 +58,9 @@ function SocialSearch() {
     </div>
   );
 }
+
+const style_cardDeck = {
+  padding: "32px 16px 0"
+};
 
 export default SocialSearch;
