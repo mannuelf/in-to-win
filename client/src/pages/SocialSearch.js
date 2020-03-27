@@ -28,7 +28,7 @@ function SocialSearch() {
     setFilteredUsers(filteredArray);
   };
 
-  const handleClick = friendid => {
+  const handleFollow = friendid => {
     let user = JSON.parse(sessionStorage.getItem("User"));
     axios
       .post(
@@ -64,7 +64,7 @@ function SocialSearch() {
                 username={value.username}
                 image={img}
                 score={value.points}
-                onClick={handleClick}
+                onClick={handleFollow}
               />
             );
           })
