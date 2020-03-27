@@ -63,6 +63,7 @@ function SocialSearch() {
                 image={img}
                 score={value.points}
                 onFollow={handleFollow}
+                label="Score"
               />
             );
           })

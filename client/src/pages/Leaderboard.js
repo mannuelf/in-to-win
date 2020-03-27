@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 import { BASE_URL, USERS, IMG_URL } from "../constants/constants";
+import FollowFriendCard from "../components/FollowFriendCard";
 
 function Leaderboard() {
   const [leaderboard, setLeaderboared] = useState([]);
@@ -31,14 +32,24 @@ function Leaderboard() {
   };
 
   return (
-    <div className="App">
+    <div className="App" style={style}>
       <h1>Leader Board</h1>
       {leaderboard.length > 0 ? (
         leaderboard.map((value, index) => {
+          let img;
+          value.profileimage.length > 0
+            ? (img = IMG_URL + value.profileimage[0].url)
+            : (img =
+                "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg");
           return (
-            <div key={index}>
-              {value.username}, {value.points}
-            </div>
+            <FollowFriendCard
+              key={index}
+              id={value.id}
+              image={img}
+              username={value.username}
+              rank={index + 1}
+              label="Rank"
+            />
           );
         })
       ) : (
@@ -47,5 +58,9 @@ function Leaderboard() {
     </div>
   );
 }
+
+const style = {
+  margin: "0 16px"
+};
 
 export default Leaderboard;

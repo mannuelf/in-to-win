@@ -1,7 +1,17 @@
 import React from "react";
 import FollowButton from "./common/FollowButton";
 
-function FollowFriendCard({ image, username, score, onFollow, id }) {
+function FollowFriendCard({
+  image,
+  username,
+  score,
+  rank,
+  onFollow,
+  id,
+  label
+}) {
+  const userScore = score ? score : 0;
+
   return (
     <div className="follow-friend-card" style={style_FFC}>
       <img src={image} alt={username} style={style_IMG} />
@@ -10,9 +20,9 @@ function FollowFriendCard({ image, username, score, onFollow, id }) {
           @{username}
         </div>
         <div className="score" style={style_score}>
-          Score:{" "}
+          {label}:{" "}
           <span className="yellow-dark-text-" style={style_yellowText}>
-            {score ? score : "0"}
+            {userScore || rank}
           </span>
         </div>
       </div>
