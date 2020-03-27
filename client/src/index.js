@@ -2,12 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import "./index.scss";
+import "././scss/styles.scss";
 
 import App from "./App";
 import Home from "././pages/Home";
 import Affiliate from "././pages/Affiliates";
 import AskCoronaGo from "././pages/AskCoronaGo";
+import SocialSearch from "././pages/SocialSearch";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -19,6 +20,7 @@ ReactDOM.render(
           <Route path="/" exact component={Home} />
           <Route path="/affliates" component={Affiliate} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
+          <Route path="/search-for-a-friend" component={SocialSearch} />
         </Switch>
       </App>
     </Router>
