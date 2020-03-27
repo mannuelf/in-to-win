@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import GlobalStyle from "./GlobalStyle/GlobalStyles";
 
 import "././scss/styles.scss";
 
@@ -14,6 +15,7 @@ import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <React.StrictMode>
+    <GlobalStyle />
     <Router>
       <App>
         <Switch>
