@@ -6,6 +6,7 @@ const Button = styled.button`
   padding-right: 24px;
   border: ${({ outline }) => (outline ? "2px solid" : "none")};
   height: 52px;
+  width: ${({ wide }) => (wide ? "100%" : "auto")};
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -14,7 +15,7 @@ const Button = styled.button`
   font-weight: 400;
   font-size: ${() => theme.sizes.small};
   border-radius: 25px;
-  border-color: ${() => theme.colors.primary};
+  border-color: ${theme.colors.primary};
   background: ${({ primary }) => (primary ? theme.colors.primary : "none")};
   cursor: pointer;
   transition-property: background, opacity;

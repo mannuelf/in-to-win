@@ -64,7 +64,14 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
-          <Button as="input" primary type="submit" name="submit" value="Log in" />
+          <Button
+            as="input"
+            primary
+            wide
+            type="submit"
+            name="submit"
+            value="Log in"
+          />
         </Form>
       </div>
     </LoginCont>
