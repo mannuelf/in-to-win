@@ -12,7 +12,6 @@ import FollowFriendCard from "../components/FollowFriendCard";
 function SocialSearch() {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [userFriends, setUserFriends] = useState([]);
 
   useEffect(() => {
     axios.get(BASE_URL + USERS).then(results => {
@@ -46,8 +45,6 @@ function SocialSearch() {
 
   const handleFiltering = (one, two) => {
     let currentUser = JSON.parse(sessionStorage.getItem("User"));
-    //console.log("handle filtering, users", one);
-    console.log("handle filtering, userFriends", currentUser.id);
     let removedCurrentUser = one.filter(value => {
       return value.id !== currentUser.id;
     });
@@ -63,8 +60,6 @@ function SocialSearch() {
     });
 
     setUsers(array);
-
-    console.log(array);
   };
 
   return (
