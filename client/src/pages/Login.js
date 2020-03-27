@@ -48,7 +48,9 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
-          <Button color="orange">Log in</Button>
+          <Button primary color="orange">
+            Log in
+          </Button>
           <input type="submit" name="submit" />
         </form>
       </div>

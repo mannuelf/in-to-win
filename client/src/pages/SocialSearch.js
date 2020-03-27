@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { BASE_URL, USERS } from "../constants/constants";
+import { BASE_URL, USERS, IMG_URL } from "../constants/constants";
 import axios from "axios";
+import FollowFriendCard from "../components/FollowFriendCard";
 
 function SocialSearch() {
   const [users, setUsers] = useState([]);
@@ -22,6 +23,11 @@ function SocialSearch() {
     });
     setFilteredUsers(filteredArray);
   };
+
+  const handleClick = () => {
+    console.log("Jonmar sucks");
+  };
+
   return (
     <div className="App">
       <h1>Search For a Friend</h1>
@@ -32,9 +38,13 @@ function SocialSearch() {
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
             return (
-              <div key={key}>
-                {value.username}, {value.points}
-              </div>
+              <FollowFriendCard
+                key={key}
+                name={value.username}
+                image={IMG_URL + value.profileimage[0].url}
+                score={value.points}
+                onClick={handleClick}
+              />
             );
           })
         ) : (
@@ -44,4 +54,5 @@ function SocialSearch() {
     </div>
   );
 }
+
 export default SocialSearch;
