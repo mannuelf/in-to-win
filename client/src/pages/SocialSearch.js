@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { BASE_URL, USERS, IMG_URL } from "../constants/constants";
+import {
+  BASE_URL,
+  USERS,
+  IMG_URL,
+  CUSTOMER_FRIENDS
+} from "../constants/constants";
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
 
@@ -23,8 +28,17 @@ function SocialSearch() {
     setFilteredUsers(filteredArray);
   };
 
-  const handleClick = () => {
-    console.log("Jonmar sucks");
+  const handleClick = friendid => {
+    let user = JSON.parse(sessionStorage.getItem("User"));
+    console.log("Jonmar sucks", user.id);
+    axios
+      .post(BASE_URL + CUSTOMER_FRIENDS, {
+        friendid,
+        userid: user.id
+      })
+      .then(response => {
+        console.log(response.data);
+      });
   };
 
   return (
@@ -33,7 +47,7 @@ function SocialSearch() {
       <form>
         <input type="text" name="search" className="" onChange={handleChange} />
       </form>
-      <div>
+      <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
             let img;
@@ -44,7 +58,8 @@ function SocialSearch() {
             return (
               <FollowFriendCard
                 key={key}
-                name={value.username}
+                id={value.id}
+                username={value.username}
                 image={img}
                 score={value.points}
                 onClick={handleClick}
@@ -58,5 +73,9 @@ function SocialSearch() {
     </div>
   );
 }
+
+const style_cardDeck = {
+  padding: "32px 16px 0"
+};
 
 export default SocialSearch;
