@@ -35,6 +35,7 @@ function Login({ updateErrors, updateLoginStatus }) {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
     height: 100vh;
     margin-top: -16px;
   `;
@@ -48,6 +49,10 @@ function Login({ updateErrors, updateLoginStatus }) {
 
   return (
     <LoginCont>
+      <h1>
+        InToWin
+      </h1>
+      <span>The more you in, the more you win.</span>
       <div>
         <Form onSubmit={handleSubmit}>
           <h2>Username</h2>
