@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:400,500&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
 
 * {
   box-sizing: border-box;
@@ -20,7 +21,7 @@ body {
 }
 
 a,button, body {
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 
 
