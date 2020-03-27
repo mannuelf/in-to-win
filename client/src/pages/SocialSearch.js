@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { BASE_URL, USERS, IMG_URL } from "../constants/constants";
+import {
+  BASE_URL,
+  USERS,
+  IMG_URL,
+  CUSTOMER_FRIENDS
+} from "../constants/constants";
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
 
@@ -21,12 +26,19 @@ function SocialSearch() {
         .includes(input.target.value.toLowerCase());
     });
     setFilteredUsers(filteredArray);
-    console.log(filteredArray);
   };
 
-  const handleClick = friendId => {
+  const handleClick = friendid => {
     let user = JSON.parse(sessionStorage.getItem("User"));
-    console.log("Jonmar sucks", friendId);
+    console.log("Jonmar sucks", user.id);
+    axios
+      .post(BASE_URL + CUSTOMER_FRIENDS, {
+        friendid,
+        userid: user.id
+      })
+      .then(response => {
+        console.log(response.data);
+      });
   };
 
   return (
