@@ -10,7 +10,6 @@ function SocialSearch() {
 
   useEffect(() => {
     axios.get(BASE_URL + USERS).then(results => {
-      console.log(results.data);
       setUsers(results.data);
     });
   }, []);
@@ -37,11 +36,16 @@ function SocialSearch() {
       <div>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
+            let img;
+            value.profileimage.length > 0
+              ? (img = IMG_URL + value.profileimage[0].url)
+              : (img =
+                  "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg");
             return (
               <FollowFriendCard
                 key={key}
                 name={value.username}
-                image={IMG_URL + value.profileimage[0].url}
+                image={img}
                 score={value.points}
                 onClick={handleClick}
               />
