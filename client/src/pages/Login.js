@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Button from "../components/Button";
 import axios from "axios";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
@@ -47,6 +48,7 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
+          <Button color="orange">Log in</Button>
           <input type="submit" name="submit" />
         </form>
       </div>
