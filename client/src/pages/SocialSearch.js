@@ -30,6 +30,7 @@ function SocialSearch() {
 
   const handleFollow = friendid => {
     let user = JSON.parse(sessionStorage.getItem("User"));
+    console.log(user);
     axios
       .post(
         "https://cors-anywhere.herokuapp.com/http://34.243.84.61/customerfriends",
@@ -64,7 +65,7 @@ function SocialSearch() {
                 username={value.username}
                 image={img}
                 score={value.points}
-                onClick={handleFollow}
+                onFollow={handleFollow}
               />
             );
           })
