@@ -2,7 +2,7 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/affliates",
+      "path": "/affiliates",
       "handler": "Affliate.find",
       "config": {
         "policies": []
@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/affliates/count",
+      "path": "/affiliates/count",
       "handler": "Affliate.count",
       "config": {
         "policies": []
@@ -18,7 +18,7 @@
     },
     {
       "method": "GET",
-      "path": "/affliates/:id",
+      "path": "/affiliates/:id",
       "handler": "Affliate.findOne",
       "config": {
         "policies": []
@@ -26,7 +26,7 @@
     },
     {
       "method": "POST",
-      "path": "/affliates",
+      "path": "/affiliates",
       "handler": "Affliate.create",
       "config": {
         "policies": []
@@ -34,7 +34,7 @@
     },
     {
       "method": "PUT",
-      "path": "/affliates/:id",
+      "path": "/affiliates/:id",
       "handler": "Affliate.update",
       "config": {
         "policies": []
@@ -42,7 +42,7 @@
     },
     {
       "method": "DELETE",
-      "path": "/affliates/:id",
+      "path": "/affiliates/:id",
       "handler": "Affliate.delete",
       "config": {
         "policies": []
