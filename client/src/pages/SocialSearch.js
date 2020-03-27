@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { BASE_URL, CORONA_FACTS } from "../constants/constants";
-import brain from "brain.js";
+
+import { BASE_URL, USERS } from "../constants/constants";
+import axios from "axios";
 
 function SocialSearch() {
-  useEffect(() => {});
+  useEffect(() => {
+    axios.get(BASE_URL + USERS).then(results => {
+      console.log(results);
+    });
+  }, []);
+  const handleChange = input => {};
   return (
     <div className="App">
       <h1>Search For a Friend</h1>
+      <form>
+        <input type="text" name="search" className="" onChange={handleChange} />
+      </form>
     </div>
   );
 }

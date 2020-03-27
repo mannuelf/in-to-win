@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Login from "./pages/Login";
 import { Link } from "react-router-dom";
-import "./App.scss";
 
 function App({ children }) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
