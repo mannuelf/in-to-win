@@ -19,6 +19,7 @@ body {
   margin: 0;
   height: 100vh;
 background-color: ${theme.colors.bg};
+color: ${theme.colors.text}
 }
 
 a,button, body {
