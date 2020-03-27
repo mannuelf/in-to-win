@@ -1,7 +1,7 @@
 import React from "react";
 import FollowButton from "./common/FollowButton";
 
-function FollowFriendCard({ image, username, score, onClick, id }) {
+function FollowFriendCard({ image, username, score, onFollow, id }) {
   return (
     <div className="follow-friend-card" style={style_FFC}>
       <img src={image} alt={username} style={style_IMG} />
@@ -16,7 +16,7 @@ function FollowFriendCard({ image, username, score, onClick, id }) {
           </span>
         </div>
       </div>
-      <FollowButton id={id} onClick={onClick} />
+      <FollowButton id={id} onFollow={onFollow} />
     </div>
   );
 }

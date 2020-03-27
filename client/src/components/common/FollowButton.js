@@ -1,12 +1,12 @@
 import React from "react";
 
-function FollowButton({ id, onClick }) {
+function FollowButton({ id, onFollow }) {
   return (
     <div>
       <button
         className="btn yellow-text"
         style={style_button}
-        onClick={() => onClick(id)}
+        onClick={() => onFollow(id)}
       >
         Follow
       </button>
