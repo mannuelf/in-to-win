@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
+import styled from "styled-components";
 import axios from "axios";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
@@ -25,13 +26,20 @@ function Login({ updateErrors, updateLoginStatus }) {
   };
 
   const handleChange = input => {
-    let name = input.target.name;
+    let name = input.target.name.toLowerCase();
     let value = input.target.value;
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
+  const LoginCont = styled.div`
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+  `;
+
   return (
-    <div>
+    <LoginCont>
       <div>
         <form onSubmit={handleSubmit}>
           <h2>Username</h2>
@@ -48,11 +56,10 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
-          <Button color="orange">Log in</Button>
-          <input type="submit" name="submit" />
+          <Button color="red" type="submit" name="submit" >Log In</Button>
         </form>
       </div>
-    </div>
+    </LoginCont>
   );
 }
 
