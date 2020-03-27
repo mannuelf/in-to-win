@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
-import styled from "styled-components";
 import axios from "axios";
+import styled from "styled-components";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
 
@@ -34,14 +34,22 @@ function Login({ updateErrors, updateLoginStatus }) {
   const LoginCont = styled.div`
     display: flex;
     justify-content: center;
-    align-content: center;
-    height: 100%;
+    align-items: center;
+    height: 100vh;
+    margin-top: -16px;
+  `;
+
+  const Form = styled.form`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   `;
 
   return (
     <LoginCont>
       <div>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <h2>Username</h2>
           <input
             type="text"
@@ -56,8 +64,8 @@ function Login({ updateErrors, updateLoginStatus }) {
             onChange={handleChange}
             className=""
           />
-          <Button color="red" type="submit" name="submit" >Log In</Button>
-        </form>
+          <Button as="input" primary type="submit" name="submit" value="Log in" />
+        </Form>
       </div>
     </LoginCont>
   );
