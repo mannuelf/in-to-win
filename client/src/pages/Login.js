@@ -47,15 +47,11 @@ function Login({ updateErrors, updateLoginStatus }) {
     flex-direction: column;
   `;
 
-  const ColouredSpan = styled.span`
+  const ColouredSpan = styled.span``;
 
-  `;
-  
   return (
     <div>
-      <h1>
-        InToWin
-      </h1>
+      <h1>InToWin</h1>
       <span>The more you in, the more you win.</span>
       <div>
         <form onSubmit={handleSubmit}>
