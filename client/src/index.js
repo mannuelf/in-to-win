@@ -14,6 +14,7 @@ import Leaderboard from "././pages/Leaderboard";
 import Profile from "./pages/Profile";
 import TaskFileUploader from "./pages/FileUpload";
 import APITest from "./pages/APITest";
+import AffiliateSpecific from "./pages/AffiliateSpecific";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -25,6 +26,7 @@ ReactDOM.render(
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/affiliates" component={Affiliate} />
+          <Route path="/affiliatespecific/:id" component={AffiliateSpecific} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
           <Route path="/search-for-a-friend" component={SocialSearch} />
           <Route path="/leaderboard" component={Leaderboard} />
