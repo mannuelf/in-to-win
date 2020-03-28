@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
 import brain from "brain.js";
+import Loader from "../components/Loader";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
@@ -79,8 +80,9 @@ function AskCoronaGo() {
   };
 
   return (
-    <div className="App">
-      <h1>Ask Corona Buster a question about the Corona Virus</h1>
+    <div className="App" style={style_container}>
+      <Loader />
+      {/* <h1>Ask Corona Buster a question about the Corona Virus</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -94,8 +96,15 @@ function AskCoronaGo() {
         <br />
         <br />
         {theAnswer}
-      </form>
+      </form> */}
     </div>
   );
 }
+
+const style_container = {
+  width: "100vw",
+  height: "100vh",
+  margin: "0",
+  padding: "0"
+};
 export default AskCoronaGo;
