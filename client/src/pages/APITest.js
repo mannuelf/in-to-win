@@ -23,18 +23,23 @@ export default function APITest() {
       .then(setCompletedTasks);
   }, []);
 
+  function handleCompleteTask(event, userId, taskId) {
+    event.preventDefault();
+
+    TaskAPI.complete(taskId, userId, event.target.image.files[0])
+      .then((resp) => console.dir("response: ", resp))
+      .catch((err) => console.dir("error: ", err));
+  }
   
-  function handleCompleteTask() {
-    TaskAPI.complete(1, user.id)
-      .then((resp) => console.dir(resp))
-      .catch((err) => console.dir(err));
+  function handleStartTask(event, userId, taskId) {
+    TaskAPI.start(taskId, userId)
+      .then((resp) => console.dir("response: ", resp))
+      .catch((err) => console.dir("error: ", err));
   }
 
   return (
     <div>
       <h1>API Tests</h1>
-
-      <button onClick={handleCompleteTask}>Complete task</button>
 
       <h2>Started tasks</h2>
       <ul>
@@ -42,6 +47,10 @@ export default function APITest() {
           <li key={task.id}>
             <h3>{task.name}</h3>
             <p>{task.description}</p>
+            <form onSubmit={(e) => handleCompleteTask(e, task.id, user.id)}>
+              <input type="file" name="image" />
+              <button type="submit">Complete task</button>
+            </form>
           </li>
         ))}
       </ul>
@@ -60,6 +69,8 @@ export default function APITest() {
           <li key={task.id}>
             <h3>{task.name}</h3>
             <p>{task.description}</p>
+
+            <button onClick={(e) => handleStartTask(e, task.id, user.id)}>Start task</button>
           </li>
         ))}
       </ul>
