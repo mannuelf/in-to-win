@@ -18,7 +18,6 @@ const Form = styled.form`
   max-height: 800px;
 `;
 
-
 const ColouredSpan = styled.span``;
 function Login({ updateErrors, updateLoginStatus }) {
   const [username, setUsername] = useState("");
