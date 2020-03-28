@@ -47,14 +47,4 @@ function TaskFileUploader() {
   );
 }
 
-// https://stackoverflow.com/a/1186309
-function objectifyForm(formArray) {
-  //serialize data function
-  var returnArray = {};
-  for (var i = 0; i < formArray.length; i++) {
-    returnArray[formArray[i]["name"]] = formArray[i]["value"];
-  }
-  return returnArray;
-}
-
 export default TaskFileUploader;
