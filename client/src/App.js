@@ -6,9 +6,8 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 import Navbar from "./components/Navbar";
-const ErrorComp = styled.p`
-
-`;
+import Toast from "./components/Toast";
+const ErrorComp = styled.p``;
 
 const LoginCont = styled.div`
   display: flex;
@@ -49,6 +48,11 @@ function App({ children }) {
           <Link to="/fileupload">Test Link</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
+          <Toast
+            title="Hello there"
+            text="It's over, Anakin! I have the high ground!"
+            canCancel
+          />
           <Navbar />
         </div>
       ) : (
