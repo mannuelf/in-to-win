@@ -1,7 +1,7 @@
 import React from "react"
 
-function HeaderCard({firstName, profileImgUrl, points}) {
-  console.log(profileImgUrl);
+function HeaderCard({username, firstName, profileImgUrl, points}) {
+  console.log(username);
   return(
     <div className="header-card-content">
       <div className="header-card-media">
@@ -11,7 +11,7 @@ function HeaderCard({firstName, profileImgUrl, points}) {
           </figure>
         </div>
         <div className="header-card-media-content">
-          <p className="header-card-content-title">{firstName}</p>
+          <p className="header-card-content-title">@{username}</p>
           <p className="header-card-content-subtitle">{points}</p>
         </div>
       </div>

@@ -7,6 +7,7 @@ import HeaderCard from "../components/HeaderCard"
 function Profile() {
   const user = JSON.parse(sessionStorage.getItem("User"));
   const [url] = user.profileimage;
+  const username = user.username;
   const firstName = user.Firstname;
   const lastName = user.Lastname;
   const points = user.points;
@@ -17,6 +18,7 @@ function Profile() {
       <h1>Profile</h1>
       <HeaderCard
           url={profileImgUrl}
+          username={username}
           firstName={firstName}
           profileImgUrl={profileImgUrl}
           points={points}
