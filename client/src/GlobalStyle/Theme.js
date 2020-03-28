@@ -12,8 +12,8 @@ const theme = {
   },
   gradient:
     "linear-gradient(0deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2))",
-  shadow: "0px 4px 16px rgba(0,0,0,.25);",
-  shadowUp: "0px -4px 16px rgba(0,0,0,.25);"
+  shadow: "0px 2px 8px rgba(0,0,0,.10)",
+  shadowUp: "0px -4px 16px rgba(0,0,0,.25)"
 };
 
 export default theme;
