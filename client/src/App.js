@@ -4,6 +4,8 @@ import Login from "./pages/Login";
 
 import { Link } from "react-router-dom";
 
+import Navbar from "./components/Navbar";
+
 function App({ children }) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -32,6 +34,7 @@ function App({ children }) {
           <Link to="/fileupload">Test Link</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
+          <Navbar />
         </div>
       ) : (
         <div>
