@@ -18,7 +18,6 @@ const Form = styled.form`
   max-height: 800px;
 `;
 
-
 const ColouredSpan = styled.span``;
 function Login({ updateErrors, updateLoginStatus }) {
   const [username, setUsername] = useState("");
@@ -35,7 +34,7 @@ function Login({ updateErrors, updateLoginStatus }) {
         sessionStorage.setItem("JWT", response.data.jwt);
         sessionStorage.setItem("User", JSON.stringify(response.data.user));
         updateLoginStatus();
-        window.location.reload();
+        window.location = "/";
       })
       .catch(() => {
         updateErrors();
