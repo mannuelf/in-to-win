@@ -12,6 +12,7 @@ import AskCoronaGo from "././pages/AskCoronaGo";
 import SocialSearch from "././pages/SocialSearch";
 import Leaderboard from "././pages/Leaderboard";
 import Profile from "./pages/Profile";
+import TaskFileUploader from "./pages/FileUpload";
 import APITest from "./pages/APITest";
 
 import * as serviceWorker from "./serviceWorker";
@@ -28,6 +29,7 @@ ReactDOM.render(
           <Route path="/search-for-a-friend" component={SocialSearch} />
           <Route path="/leaderboard" component={Leaderboard} />
           <Route path="/profile" component={Profile} />
+          <Route path="/fileupload" component={TaskFileUploader} />
           <Route path="/apitest" component={APITest} />
         </Switch>
       </App>
