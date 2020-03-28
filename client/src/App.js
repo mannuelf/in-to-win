@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
+import Navbar from "./components/Navbar";
 const ErrorComp = styled.p`
 
 `;
@@ -45,8 +46,10 @@ function App({ children }) {
           <Link to="/search-for-a-friend">Find a Friend</Link>
           <Link to="/leaderboard">Leaderboard</Link>
           <Link to="/profile">Profile</Link>
+          <Link to="/fileupload">Test Link</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
+          <Navbar />
         </div>
       ) : (
         <LoginCont>
