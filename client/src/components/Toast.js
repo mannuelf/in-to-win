@@ -6,7 +6,8 @@ import AlertIcon from "../assets/icons/svg/alert-circle-outline.svg";
 
 const StyledWrapper = styled.div`
   padding: 1.6rem;
-  position: absolute;
+  z-index: 100;
+  position: fixed;
   left: 0;
   right: 0;
   bottom: 8rem;
