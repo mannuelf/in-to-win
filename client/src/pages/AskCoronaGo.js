@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
+import Loader from "./../assets/gifs/ai-orb-transparent.gif";
 import brain from "brain.js";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
   const [theAnswer, setTheAnswer] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
   let trainedNet;
 
   const encode = arg => {
@@ -61,6 +63,7 @@ function AskCoronaGo() {
     let results = trainedNet(encode(input));
     let output = results.true > results.false ? "true" : "false";
     setTheAnswer(output);
+    setShowLoading(false);
 
     // let output;
     // results.true > results.false
@@ -75,26 +78,35 @@ function AskCoronaGo() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setShowLoading(true);
     train();
   };
 
   return (
     <div className="App">
-      <h1>Ask Corona Buster a question about the Corona Virus</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="coronaQuestion"
-          className=""
-          onChange={handleChange}
-        />
-        <input type="submit" />
+      {!showLoading ? (
+        <>
+          <h1>Ask Corona Buster a question about the Corona Virus</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="coronaQuestion"
+              className=""
+              onChange={handleChange}
+            />
+            <input type="submit" />
 
-        <br />
-        <br />
-        <br />
-        {theAnswer}
-      </form>
+            <br />
+            <br />
+            <br />
+            {theAnswer}
+          </form>
+        </>
+      ) : (
+        <div>
+          <img src={Loader} alt="brain gif" width="100%" />
+        </div>
+      )}
     </div>
   );
 }
