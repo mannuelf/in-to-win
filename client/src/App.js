@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+
 import Login from "./pages/Login";
+
 import { Link } from "react-router-dom";
 
 function App({ children }) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
   const handleLogin = () => {
     setisUserLoggedIn(true);
   };
@@ -24,6 +27,8 @@ function App({ children }) {
           <Link to="/affiliates">affiliates</Link>
           <Link to="/ask-corona-go">Get your facts straight</Link>
           <Link to="/search-for-a-friend">Find a Friend</Link>
+          <Link to="/leaderboard">Leaderboard</Link>
+          <Link to="/profile">Profile</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
         </div>

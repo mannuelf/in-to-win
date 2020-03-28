@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-import { BASE_URL, USERS, IMG_URL } from "../constants/constants";
+import {
+  BASE_URL,
+  USERS,
+  IMG_URL,
+  CUSTOMER_FRIENDS
+} from "../constants/constants";
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
 
@@ -10,8 +15,9 @@ function SocialSearch() {
 
   useEffect(() => {
     axios.get(BASE_URL + USERS).then(results => {
-      console.log(results.data);
-      setUsers(results.data);
+      axios.get(BASE_URL + CUSTOMER_FRIENDS).then(friendResults => {
+        handleFiltering(results.data, friendResults.data);
+      });
     });
   }, []);
 
@@ -24,8 +30,36 @@ function SocialSearch() {
     setFilteredUsers(filteredArray);
   };
 
-  const handleClick = () => {
-    console.log("Jonmar sucks");
+  const handleFollow = friendid => {
+    let user = JSON.parse(sessionStorage.getItem("User"));
+    console.log(friendid.toString(), user.id.toString());
+    axios
+      .post(BASE_URL + CUSTOMER_FRIENDS, {
+        friendNumber: friendid.toString(),
+        userNumber: user.id.toString()
+      })
+      .then(response => {
+        console.log(response.data);
+      });
+  };
+
+  const handleFiltering = (one, two) => {
+    let currentUser = JSON.parse(sessionStorage.getItem("User"));
+    let removedCurrentUser = one.filter(value => {
+      return value.id !== currentUser.id;
+    });
+    let showAllCurrentUserFriends = two.filter(value => {
+      return value.userNumber === currentUser.id.toString();
+    });
+    let array = removedCurrentUser.filter(item => {
+      return (
+        showAllCurrentUserFriends.filter(item2 => {
+          return item.id.toString() == item2.friendNumber;
+        }).length == 0
+      );
+    });
+
+    setUsers(array);
   };
 
   return (
@@ -34,16 +68,23 @@ function SocialSearch() {
       <form>
         <input type="text" name="search" className="" onChange={handleChange} />
       </form>
-      <div>
+      <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
+            let img;
+            value.profileimage.length > 0
+              ? (img = IMG_URL + value.profileimage[0].url)
+              : (img =
+                  "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg");
             return (
               <FollowFriendCard
                 key={key}
-                name={value.username}
-                image={IMG_URL + value.profileimage[0].url}
+                id={value.id}
+                username={value.username}
+                image={img}
                 score={value.points}
-                onClick={handleClick}
+                onFollow={handleFollow}
+                label="Score"
               />
             );
           })
@@ -54,5 +95,9 @@ function SocialSearch() {
     </div>
   );
 }
+
+const style_cardDeck = {
+  padding: "32px 16px 0"
+};
 
 export default SocialSearch;

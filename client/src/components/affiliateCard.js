@@ -1,7 +1,4 @@
 import React from "react";
-
-import axios from "axios";
-
 function AffiliatesCard({ name, description, logo }) {
   return (
     <div className="card">

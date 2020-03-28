@@ -10,6 +10,8 @@ import Home from "././pages/Home";
 import Affiliate from "././pages/Affiliates";
 import AskCoronaGo from "././pages/AskCoronaGo";
 import SocialSearch from "././pages/SocialSearch";
+import Leaderboard from "././pages/Leaderboard";
+import Profile from "./pages/Profile";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -23,6 +25,8 @@ ReactDOM.render(
           <Route path="/affiliates" component={Affiliate} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
           <Route path="/search-for-a-friend" component={SocialSearch} />
+          <Route path="/leaderboard" component={Leaderboard} />
+          <Route path="/profile" component={Profile} />
         </Switch>
       </App>
     </Router>

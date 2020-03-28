@@ -9,7 +9,6 @@ function Affiliates() {
   const [affiliates, setAffiliates] = useState([]);
   useEffect(() => {
     axios.get(BASE_URL + AFFILIATES_URL).then(response => {
-      console.log(response.data);
       setAffiliates(response.data);
     });
   }, []);
