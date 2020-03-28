@@ -19,6 +19,7 @@ function Affiliates() {
         return (
           <AffiliateCard
             key={index}
+            id={value.id}
             name={value.name}
             description={value.description}
             logo={IMG_URL + value.logo.url}
