@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
+import TaskCard from "../components/TaskCard";
 import axios from "axios";
 import styled from "styled-components";
 
@@ -51,11 +52,11 @@ function Login({ updateErrors, updateLoginStatus }) {
   const ColouredSpan = styled.span``;
 
   return (
-    <div>
+    <LoginCont>
       <h1>InToWin</h1>
       <span>The more you in, the more you win.</span>
       <div>
-        <form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <h2>Username</h2>
           <input
             type="text"
@@ -78,9 +79,9 @@ function Login({ updateErrors, updateLoginStatus }) {
             name="submit"
             value="Log in"
           />
-        </form>
+        </Form>
       </div>
-    </div>
+    </LoginCont>
   );
 }
 
