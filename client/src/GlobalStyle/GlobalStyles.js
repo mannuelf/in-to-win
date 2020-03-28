@@ -26,7 +26,9 @@ a,button, body {
   font-family: 'Roboto', sans-serif;
 }
 
-
+.App {
+  overflow: hidden;
+}
 
 
 `;

@@ -30,11 +30,12 @@ const StyledIcon = styled.img`
 `;
 const NavWrapper = styled.nav`
   padding: 1.6rem 0;
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-around;
   margin-top: 8rem;
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 8rem;
   bottom: 0;
