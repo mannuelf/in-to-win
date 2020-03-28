@@ -43,10 +43,9 @@ const StyledRow = styled.div`
 `;
 
 const Toast = ({
-  icon = "alert-circle-outline",
   title = "Warning",
   text = "This is a warning, blah blah blah...",
-  canCancel = true,
+  canCancel = false,
   onAccept
 }) => {
   const [open, setOpen] = useState(true);
@@ -54,6 +53,7 @@ const Toast = ({
   const handleCloseToast = () => {
     setOpen(false);
   };
+
   return (
     <>
       {open && (
@@ -69,7 +69,7 @@ const Toast = ({
                 Cancel
               </StyledButton>
             )}
-            <StyledButton onClick={onAccept} primary>
+            <StyledButton onClick={onAccept || handleCloseToast} primary>
               OK
             </StyledButton>
           </StyledRow>
