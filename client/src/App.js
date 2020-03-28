@@ -9,6 +9,10 @@ import styled from "styled-components";
 import Navbar from "./components/Navbar";
 import Toast from "./components/Toast";
 import HeaderCard from "././components/HeaderCard";
+import AskCoronaGo from "././pages/AskCoronaGo";
+
+import Modal from "react-responsive-modal";
+
 const ErrorComp = styled.p``;
 
 const LoginCont = styled.div`
@@ -22,7 +26,7 @@ const LoginCont = styled.div`
   text-align: center;
 `;
 
-function App({ children }) {
+function App(props) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
@@ -38,6 +42,14 @@ function App({ children }) {
     setisUserLoggedIn(false);
   };
 
+  const onOpenModal = () => {
+    setShowDialog(true);
+  };
+
+  const onCloseModal = () => {
+    setShowDialog(false);
+  };
+
   return (
     <div className="App">
       {isUserLoggedIn && sessionStorage.getItem("JWT") !== null ? (
@@ -49,13 +61,17 @@ function App({ children }) {
           <Link to="/leaderboard">Leaderboard</Link>
           <Link to="/profile">Profile</Link>
           <Link to="/fileupload">Test Link</Link> */}
+          <Modal open={showDialog} onClose={onCloseModal}>
+            <AskCoronaGo />
+          </Modal>
           <button onClick={handleLogout}>Logout</button>
-          {children}
+          {props.children}
           <Toast
             title="Hello there"
             text="It's over, Anakin! I have the high ground!"
             canCancel
           />
+          <button onClick={onOpenModal}>Open modal</button>
           <Navbar />
         </div>
       ) : (

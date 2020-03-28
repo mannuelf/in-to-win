@@ -31,7 +31,7 @@ function Login({ updateErrors, updateLoginStatus }) {
 
   const handleChange = input => {
     let name = input.target.name;
-    let value = input.target.value.toLowerCase();
+    let value = input.target.value;
     name === "username" ? setUsername(value) : setPassword(value);
   };
 

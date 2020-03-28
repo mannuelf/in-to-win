@@ -53,7 +53,6 @@ function AskCoronaGo() {
         trainedNet = net.toFunction();
         console.log("Finished training...");
         let answer = execute(coronaQuery);
-        setTheAnswer(answer);
         //document.getElementById("theResult").innerHTML = answer;
       });
   }
@@ -61,7 +60,8 @@ function AskCoronaGo() {
   const execute = input => {
     let results = trainedNet(encode(input));
     let output = results.true > results.false ? "true" : "false";
-    console.log(output);
+    setTheAnswer(output);
+
     // let output;
     // results.true > results.false
     //   ? (output = `<h3> The answer is <b>correct</b> <span class="glyphicon glyphicon-ok" aria-hidden="true"></h3></div>`)
@@ -80,7 +80,7 @@ function AskCoronaGo() {
 
   return (
     <div className="App">
-      <h1>Get your facts straight about the Corona virus</h1>
+      <h1>Ask Corona Buster a question about the Corona Virus</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -89,6 +89,11 @@ function AskCoronaGo() {
           onChange={handleChange}
         />
         <input type="submit" />
+
+        <br />
+        <br />
+        <br />
+        {theAnswer}
       </form>
     </div>
   );
