@@ -29,6 +29,7 @@ function App({ children }) {
           <Link to="/search-for-a-friend">Find a Friend</Link>
           <Link to="/leaderboard">Leaderboard</Link>
           <Link to="/profile">Profile</Link>
+          <Link to="/fileupload">Test Link</Link>
           <button onClick={handleLogout}>Logout</button>
           {children}
         </div>
