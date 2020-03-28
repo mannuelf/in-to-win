@@ -27,17 +27,6 @@ function App({ children }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [showDialog, setShowDialog] = useState(false);
 
-  const user = JSON.parse(sessionStorage.getItem("User"));
-  const [url] = user.profileimage;
-  const username = user.username;
-  const firstName = user.Firstname;
-
-  const points = user.points;
-  const imgUrl = user.profileimage.length ? `${IMG_URL}${url.url}` : false;
-  const noImgUrl =
-    "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg";
-  const profileImgUrl = user.profileimage.length ? imgUrl : noImgUrl;
-
   const handleLogin = () => {
     setisUserLoggedIn(true);
   };
@@ -53,13 +42,6 @@ function App({ children }) {
     <div className="App">
       {isUserLoggedIn && sessionStorage.getItem("JWT") !== null ? (
         <div>
-          <HeaderCard
-            url={profileImgUrl}
-            username={username}
-            firstName={firstName}
-            profileImgUrl={profileImgUrl}
-            points={points}
-          />
           {/* <Link to="/">Home</Link>
           <Link to="/affiliates">affiliates</Link>
           <Link to="/ask-corona-go">Get your facts straight</Link>
