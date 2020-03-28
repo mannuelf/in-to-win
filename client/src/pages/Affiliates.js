@@ -18,6 +18,7 @@ function Affiliates() {
       {affiliates.map((value, index) => {
         return (
           <AffiliateCard
+            withButton
             key={index}
             id={value.id}
             name={value.name}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import AffiliateCard from "../components/affiliateCard";
 
 import { BASE_URL, AFFILIATES_URL, IMG_URL } from "../constants/constants";
 import axios from "axios";
@@ -14,24 +15,20 @@ function AffiliateSpecific(props) {
         setAffiliate(response.data);
       });
   }, []);
+  console.log(affiliate);
   return (
     <div className="App">
       <h1>Affiliates</h1>
       {affiliate !== undefined ? (
-        <>
-          <h1>{affiliate.name}</h1>
-          <img src={IMG_URL + affiliate.logo.url} alt={affiliate.name} />
-          <iframe
-            width="100%"
-            height="315"
-            src={affiliate.videolink}
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>{affiliate.description}</p>
-          <p>{affiliate.websiteurl}</p>
-        </>
+        <AffiliateCard
+          name={affiliate.name && affiliate.name}
+          logo={affiliate.logo.url && IMG_URL + affiliate.logo.url}
+          videolink={affiliate.videolink && affiliate.videolink}
+          id={affiliate.id}
+          btnText="Go to website"
+          description={affiliate.description}
+          btnLink={affiliate.websiteurl}
+        />
       ) : (
         <div>No Data</div>
       )}
