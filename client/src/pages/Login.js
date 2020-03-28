@@ -3,24 +3,21 @@ import Button from "../components/Button";
 import TaskCard from "../components/TaskCard";
 import axios from "axios";
 import styled from "styled-components";
+import theme from "../GlobalStyle/Theme";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
-
-const LoginCont = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  height: 100vh;
-  margin-top: -16px;
-`;
 
 const Form = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border: 5px 5px 0 0;
+  background-color: ${theme.colors.grey};
+  width: 100%;
+  max-height: 800px;
 `;
+
 
 const ColouredSpan = styled.span``;
 function Login({ updateErrors, updateLoginStatus }) {
@@ -38,6 +35,7 @@ function Login({ updateErrors, updateLoginStatus }) {
         sessionStorage.setItem("JWT", response.data.jwt);
         sessionStorage.setItem("User", JSON.stringify(response.data.user));
         updateLoginStatus();
+        window.location.reload();
       })
       .catch(() => {
         updateErrors();
@@ -45,13 +43,13 @@ function Login({ updateErrors, updateLoginStatus }) {
   };
 
   const handleChange = input => {
-    let name = input.target.name.toLowerCase();
-    let value = input.target.value;
+    let name = input.target.name;
+    let value = input.target.value.toLowerCase();
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
   return (
-    <LoginCont>
+    <div>
       <h1>InToWin</h1>
       <span>The more you in, the more you win.</span>
       <div>
@@ -80,7 +78,7 @@ function Login({ updateErrors, updateLoginStatus }) {
           />
         </Form>
       </div>
-    </LoginCont>
+    </div>
   );
 }
 
