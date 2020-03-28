@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
-import Loader from "./../assets/gifs/ai-orb-transparent.gif";
 import brain from "brain.js";
 import Loader from "../components/Loader";
+import LoadingGif from "./../assets/gifs/ai-orb-transparent.gif";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
@@ -105,7 +105,7 @@ function AskCoronaGo() {
         </>
       ) : (
         <div>
-          <img src={Loader} alt="brain gif" width="100%" />
+          <img src={LoadingGif} alt="brain gif" width="100%" />
         </div>
       )}
     </div>
