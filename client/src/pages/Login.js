@@ -5,6 +5,15 @@ import styled from "styled-components";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
 
+const LoginCont = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    margin-top: -16px;
+`;
+
 function Login({ updateErrors, updateLoginStatus }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -26,33 +35,13 @@ function Login({ updateErrors, updateLoginStatus }) {
   };
 
   const handleChange = input => {
-    let name = input.target.name.toLowerCase();
-    let value = input.target.value;
+    let name = input.target.name;
+    let value = input.target.value.toLowerCase();
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
-  const LoginCont = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    height: 100vh;
-    margin-top: -16px;
-  `;
-
-  const Form = styled.form`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  `;
-
-  const ColouredSpan = styled.span`
-
-  `;
-  
   return (
-    <div>
+    <LoginCont>
       <h1>
         InToWin
       </h1>
@@ -83,7 +72,7 @@ function Login({ updateErrors, updateLoginStatus }) {
           />
         </form>
       </div>
-    </div>
+    </LoginCont>
   );
 }
 
