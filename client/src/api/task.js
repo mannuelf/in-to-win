@@ -1,15 +1,21 @@
 import { CUSTOMER_TASKS, BASE_URL, CUSTOMER_TASK_STATUS, TASKS } from "../constants/constants";
 import Axios from "axios";
 
-export function complete(taskId, userId) {
+export function complete(taskId, userId, image = null) {
     //TODO: add image
+    console.log("image", image);
 
+    const formData = new FormData();
+    formData.append("data", JSON.stringify({
+        taskid: "" + taskId,
+        customerid: "" + userId,
+        status: CUSTOMER_TASK_STATUS.Complete,
+    }));
+    if (image) {
+        formData.append("files.image", image);
+    }
     return Axios
-        .post(BASE_URL + CUSTOMER_TASKS, {
-            taskid: ""+taskId,
-            customerid: "" + userId,
-            status: CUSTOMER_TASK_STATUS.Complete,
-        });
+        .post(BASE_URL + CUSTOMER_TASKS, formData);
 }
 
 export function start(taskId, userId) {
@@ -20,7 +26,6 @@ export function start(taskId, userId) {
             status: CUSTOMER_TASK_STATUS.Started,
         });
 }
-
 
 export function getAll() {
     return Axios.get(BASE_URL + TASKS)
