@@ -28,7 +28,10 @@ function Profile() {
       <div>
         {firstName} {lastName}
       </div>
-      <Button primary>Edit Profile</Button>
+      <Button
+        outline
+        wide
+        >Edit Profile</Button>
       <div>
         <h2>Tasks Completed</h2>
       </div>

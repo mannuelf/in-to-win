@@ -14,11 +14,17 @@ const HeaderCardImage = styled.div`
 `;
 
 const HeaderCardMedia = styled.div`
-  flex-grow: 1;
+  flex-grow: 64px;
 `;
 
 const HeaderCardContent = styled.div`
  flex-grow: 2;
+ padding: .5em;
+`;
+
+const HeaderCardPoints = styled.div`
+ flex-grow: 2;
+ padding: .5em;
 `;
 
 const coverImg = {
@@ -35,9 +41,13 @@ function HeaderCard({username, firstName, profileImgUrl, points}) {
           <img style={coverImg} src={profileImgUrl} alt={firstName} />
         </HeaderCardMedia>
         <HeaderCardContent>
-          <p className="header-card-content-title">@{username}</p>
-          <p className="header-card-content-subtitle">{points}</p>
+          <div>@{username}</div>
+          <div className="header-card-content-subtitle">{points}</div>
         </HeaderCardContent>
+        <HeaderCardPoints>
+          <div>Rank: 1000</div>
+          <div>🙂</div>
+        </HeaderCardPoints>
     </HeaderCardContainer>
   )
 }
