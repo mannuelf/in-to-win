@@ -1,22 +1,34 @@
 import React from 'react'
 import { IMG_URL } from "../constants/constants";
+import TaskCard from "../components/TaskCard";
 import Button from "../components/Button";
+import HeaderCard from "../components/HeaderCard"
 
 function Profile() {
   const user = JSON.parse(sessionStorage.getItem("User"));
-  const [profileImage] = user.profileimage;
-  const profileUrl = `${IMG_URL}${profileImage.url}`;
+  const [url] = user.profileimage;
+  const username = user.username;
+  const firstName = user.Firstname;
+  const lastName = user.Lastname;
+  const points = user.points;
+  const profileImgUrl = `${IMG_URL}${url.url}`;
+
   return(
     <div>
       <h1>Profile</h1>
-      <figure>
-        <img src={profileUrl} alt={user.Firstname} />
-      </figure>
-      <div>{user.Firstname} {user.Lastname}</div>
+      <HeaderCard
+          url={profileImgUrl}
+          username={username}
+          firstName={firstName}
+          profileImgUrl={profileImgUrl}
+          points={points}
+      />
+      <div>{firstName} {lastName}</div>
       <Button primary >Edit Profile</Button>
       <div>
         <h2>Tasks Completed</h2>
       </div>
+      <TaskCard />
     </div>
   )
 }

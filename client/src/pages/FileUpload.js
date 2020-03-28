@@ -23,7 +23,7 @@ function TaskFileUploader() {
     axios
       .post(
         BASE_URL + TASK_IMAGES,
-        { filepictureimageid: userid.toString(), filepictureimage: userImage },
+        { filepictureimageid: userid.toString(), data: formData },
         {
           headers: {
             "Content-Type": "application/json"
