@@ -4,6 +4,22 @@ import Login from "./pages/Login";
 
 import { Link } from "react-router-dom";
 
+import styled from "styled-components";
+const ErrorComp = styled.p`
+
+`;
+
+const LoginCont = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  margin-top: -16px;
+  text-align: center;
+`;
+
 function App({ children }) {
   const [isUserLoggedIn, setisUserLoggedIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,10 +49,10 @@ function App({ children }) {
           {children}
         </div>
       ) : (
-        <div>
-          <p>{errorMessage}</p>
+        <LoginCont>
           <Login updateLoginStatus={handleLogin} updateErrors={handleErrors} />
-        </div>
+          <ErrorComp>{errorMessage}</ErrorComp>
+        </LoginCont>
       )}
     </div>
   );
