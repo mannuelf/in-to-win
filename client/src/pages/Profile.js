@@ -12,8 +12,7 @@ function Profile() {
   const lastName = user.Lastname;
   const points = user.points;
   const imgUrl = user.profileimage.length ? `${IMG_URL}${url.url}` : false;
-  const noImgUrl =
-    "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg";
+  const noImgUrl = "https://i7.pngguru.com/preview/117/435/819/user-silhouette-my-account-icon.jpg";
   const profileImgUrl = user.profileimage.length ? imgUrl : noImgUrl;
   return (
     <div>
