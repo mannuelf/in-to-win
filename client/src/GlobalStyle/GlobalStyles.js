@@ -31,6 +31,9 @@ a,button, body {
   overflow: hidden;
 }
 
+a.active img {
+  filter: invert(1) brightness(0.6) sepia(1) hue-rotate(0deg) saturate(3);
+}
 
 `;
 
