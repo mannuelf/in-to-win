@@ -138,17 +138,4 @@ const style_loginButton = {
   marginTop: "30px"
 };
 
-const style_policyCont = {
-  position: "absolute",
-  bottom: "20px",
-  left: "0",
-  width: "100%"
-};
-
-const style_policy = {
-  margin: "30px",
-  color: `${theme.colors.text}`,
-  textDecoration: "none"
-};
-
 export default Login;
