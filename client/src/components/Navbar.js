@@ -48,13 +48,13 @@ const Navbar = () => {
     <>
       <MarginTop />
       <NavWrapper>
-        <StyledLink to="/search-for-a-friend">
-          <StyledIcon src={FriendsIcon} />
-          Friends
-        </StyledLink>
         <StyledLink exact to="/">
           <StyledIcon src={DailiesIcon} />
           Dailies
+        </StyledLink>
+        <StyledLink to="/search-for-a-friend">
+          <StyledIcon src={FriendsIcon} />
+          Friends
         </StyledLink>
         <StyledLink to="/leaderboard">
           <StyledIcon src={RewardsIcon} />
