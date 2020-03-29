@@ -31,7 +31,7 @@ function Login({ updateErrors, updateLoginStatus }) {
 
   const handleChange = input => {
     let name = input.target.name;
-    let value = input.target.value;
+    let value = input.target.value.toLowerCase();
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
@@ -39,10 +39,10 @@ function Login({ updateErrors, updateLoginStatus }) {
     <div>
       <div className="logo-container" style={style_logoContainer}>
         <h1>InToWin</h1>
-        <span>The more you in, the more you win.</span>
+        <span>The more <span style={style_spanColor}>you in</span>, the more <span style={style_spanColor}>you win</span>.</span>
       </div>
       <div style={style_loginForm}>
-        <h2 style={style_heading}>Login</h2>
+        <h2 style={style_heading}>Log in</h2>
         <Form onSubmit={handleSubmit}>
           {" "}
           <input
@@ -68,6 +68,7 @@ function Login({ updateErrors, updateLoginStatus }) {
             type="submit"
             name="submit"
             value="Log in"
+            style={style_loginButton}
           />
         </Form>
       </div>
@@ -98,12 +99,16 @@ const style_logoContainer = {
   left: "0"
 };
 
+const style_spanColor = {
+  color: `${theme.colors.primary}`
+}
+
 const style_heading = {
   width: "100%",
   textAlign: "center",
-  fontSize: "16px",
+  fontSize: "25px",
   fontWeight: "400",
-  margin: "0 0 64px 0"
+  margin: "20px 0 60px 0"
 };
 
 const style_loginInput = {
@@ -111,17 +116,24 @@ const style_loginInput = {
   borderBottom: `2pt solid ${theme.colors.primary}`,
   backgroundColor: "transparent",
   width: "100%",
-  padding: "8px 0",
+  paddingBottom: "5px",
+  paddingLeft: "5px",
   fontSize: "24px",
   color: `${theme.colors.text}`,
-  marginBottom: "16px",
-  textAlign: "center"
+  marginBottom: "16px"
 };
 
 const Form = styled.form`
   border: 5px 5px 0 0;
   width: 100%;
   max-height: 800px;
+  margin-bottom: 40px;
 `;
+
+const style_loginButton = {
+  position: "absolute",
+  bottom: "40px",
+  left: "0"
+}
 
 export default Login;
