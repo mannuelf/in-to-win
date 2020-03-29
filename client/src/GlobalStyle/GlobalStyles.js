@@ -2,10 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import theme from "./Theme";
 
 const GlobalStyle = createGlobalStyle`
-
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
-@import url('https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap');
-
 * {
   box-sizing: border-box;
 }
