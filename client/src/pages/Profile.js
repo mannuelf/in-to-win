@@ -32,4 +32,11 @@ function Profile() {
   );
 }
 
+const style_container = {
+  display: "flex",
+  justtifyContent: "center",
+  flexDirection: "column",
+  padding: "0 16px"
+};
+
 export default Profile;
