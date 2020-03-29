@@ -8,7 +8,7 @@ import Button from "../components/Button";
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
   const [theAnswer, setTheAnswer] = useState([
-    "Hi! I'm Corona Buster. How can I help you?"
+    "Hi! I'm a AI based Fact Checker. How can I help you?"
   ]);
   const [botChat, setBotChat] = useState([]);
 
