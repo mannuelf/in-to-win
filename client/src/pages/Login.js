@@ -71,6 +71,10 @@ function Login({ updateErrors, updateLoginStatus }) {
             style={style_loginButton}
           />
         </Form>
+        <div style={style_policyCont}>
+          <a href="" style={style_policy}>Privacy policy</a>
+          <a href="" style={style_policy}>Terms of Service</a>
+        </div>
       </div>
     </div>
   );
@@ -81,7 +85,7 @@ const style_loginForm = {
   marginTop: "64px",
   height: "70vh",
   padding: "16px",
-  boxSizing: " border-box",
+  boxSizing: "border-box",
   backgroundColor: `${theme.colors.grey}`,
   position: "absolute",
   bottom: "0",
@@ -131,9 +135,20 @@ const Form = styled.form`
 `;
 
 const style_loginButton = {
+  marginTop: "50px"
+}
+
+const style_policyCont = {
   position: "absolute",
-  bottom: "40px",
-  left: "0"
+  bottom: "20px",
+  left: "0",
+  width: "100%"
+}
+
+const style_policy = {
+  margin: "30px",
+  color: `${theme.colors.text}`,
+  textDecoration: "none"
 }
 
 export default Login;
