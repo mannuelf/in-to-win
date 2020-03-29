@@ -27,6 +27,7 @@ const MarginTop = styled.div`
 const StyledIcon = styled.img`
   width: 24px;
   height: 24px;
+  filter: brightness(0) invert(1);
 `;
 const NavWrapper = styled.nav`
   padding: 1.6rem 0;
@@ -47,13 +48,13 @@ const Navbar = () => {
     <>
       <MarginTop />
       <NavWrapper>
-        <StyledLink to="/search-for-a-friend">
-          <StyledIcon src={FriendsIcon} />
-          Friends
-        </StyledLink>
         <StyledLink exact to="/">
           <StyledIcon src={DailiesIcon} />
           Dailies
+        </StyledLink>
+        <StyledLink to="/search-for-a-friend">
+          <StyledIcon src={FriendsIcon} />
+          Friends
         </StyledLink>
         <StyledLink to="/leaderboard">
           <StyledIcon src={RewardsIcon} />
