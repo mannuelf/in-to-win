@@ -84,7 +84,7 @@ function AskCoronaGo() {
   };
 
   return (
-    <div className="App">
+    <div className="modal-div">
       {!showLoading ? (
         <>
           <h1>Ask Corona Buster a question about the Corona Virus</h1>

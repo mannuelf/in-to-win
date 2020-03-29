@@ -31,7 +31,7 @@ function Login({ updateErrors, updateLoginStatus }) {
 
   const handleChange = input => {
     let name = input.target.name;
-    let value = input.target.value.toLowerCase();
+    let value = input.target.value;
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
@@ -39,7 +39,10 @@ function Login({ updateErrors, updateLoginStatus }) {
     <div>
       <div className="logo-container" style={style_logoContainer}>
         <h1>InToWin</h1>
-        <span>The more <span style={style_spanColor}>you in</span>, the more <span style={style_spanColor}>you win</span>.</span>
+        <span>
+          The more <span style={style_spanColor}>you in</span>, the more{" "}
+          <span style={style_spanColor}>you win</span>.
+        </span>
       </div>
       <div style={style_loginForm}>
         <h2 style={style_heading}>Log in</h2>
@@ -69,10 +72,6 @@ function Login({ updateErrors, updateLoginStatus }) {
             style={style_loginButton}
           />
         </Form>
-        <div style={style_policyCont}>
-          <a href="" style={style_policy}>Privacy policy</a>
-          <a href="" style={style_policy}>Terms of Service</a>
-        </div>
       </div>
     </div>
   );
@@ -103,7 +102,7 @@ const style_logoContainer = {
 
 const style_spanColor = {
   color: `${theme.colors.primary}`
-}
+};
 
 const style_heading = {
   width: "100%",
@@ -137,19 +136,19 @@ const Form = styled.form`
 
 const style_loginButton = {
   marginTop: "30px"
-}
+};
 
 const style_policyCont = {
   position: "absolute",
   bottom: "20px",
   left: "0",
   width: "100%"
-}
+};
 
 const style_policy = {
   margin: "30px",
   color: `${theme.colors.text}`,
   textDecoration: "none"
-}
+};
 
 export default Login;
