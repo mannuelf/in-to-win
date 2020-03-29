@@ -17,13 +17,26 @@ function Profile() {
   const profileImgUrl = user.profileimage.length ? imgUrl : noImgUrl;
   return (
     <div>
-      <h1>Profile</h1>
-      <div>
+      <div style={style_container}>
+        <h1>Profile</h1>
+        <HeaderCard
+          username={username}
+          firstName={firstName}
+          profileImgUrl={profileImgUrl}
+          points={points}
+        />
         <h2>Tasks Completed</h2>
       </div>
       <TaskCard />
     </div>
   );
 }
+
+const style_container = {
+  display: "flex",
+  justtifyContent: "center",
+  flexDirection: "column",
+  padding: "0 16px"
+};
 
 export default Profile;
