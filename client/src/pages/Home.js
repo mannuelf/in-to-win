@@ -12,15 +12,58 @@ function Home() {
   const [state, setState] = useState({
     tasks: []
   });
+  console.log("state:", state);
+
   useEffect(() => {
-    TaskAPI.getAll(user.id)
-      .then(allTasks => {
-        setState({
-          ...state,
-          tasks: allTasks,
-        })
+    TaskAPI.getAll()
+      .then(tasks => {
+        TaskAPI.getByUser(user.id)
+          .then(customerTasks => tasks.map(task => {
+            task.customerTask = customerTasks.filter(ct => ct.taskid === ""+task.id)[0];
+            return task;
+          }))
+          .then(taskList => {
+            setState({
+              ...state,
+              tasks: taskList,
+            });
+          })
       });
   }, [user.id]);
+
+  function handleAccepted(taskId) {
+    console.log("accepted");
+    TaskAPI.start(taskId, user.id)
+      .then((resp) => {
+        const customerTask = resp.data;
+        setState({
+          ...state,
+          tasks: state.tasks.map(task => {
+            if (task.id === taskId) {
+              task.customerTask = customerTask;
+            }
+            return task;
+          })
+        })
+      });
+  }
+
+  function handleCompleted(customerTaskId) {
+    console.log("completed");
+    TaskAPI.complete(customerTaskId)
+      .then((resp) => {
+        const customerTask = resp.data;
+        setState({
+          ...state,
+          tasks: state.tasks.map(task => {
+            if (task.customerTask && task.customerTask.id === customerTaskId) {
+              task.customerTask = customerTask;
+            }
+            return task;
+          })
+        })
+      });
+  }
 
   return (
     <div className="App">
@@ -29,7 +72,11 @@ function Home() {
       <ul>
         {state.tasks.map(task => (
           <li key={task.id}>
-            <TaskCard title={task.name} description={task.description} difficulty={task.difficulty} />
+            <TaskCard
+              id={task.id} title={task.name} description={task.description} difficulty={task.difficulty}
+              customerTaskId={task.customerTask && task.customerTask.id}
+              status={task.customerTask && task.customerTask.status}
+              handleAccepted={handleAccepted} handleFinished={handleCompleted} />
           </li>
         ))}
       </ul>

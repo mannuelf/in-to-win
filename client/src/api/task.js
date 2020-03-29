@@ -58,8 +58,8 @@ function getUserTasksByUrl(url) {
             if (resp.data && resp.data.length) {
                 return resp.data;
             }
-            return Promise.reject("No customertasks found.");
-        })
+            return [];
+        });/*
         .then(custTasks => {
             // get the tasks for each customertask
             const taskIds = custTasks.map(ct => "id_in=" + ct.taskid).join("&");
@@ -70,5 +70,5 @@ function getUserTasksByUrl(url) {
                     ct.task = tasks.filter(task => ""+task.id === ct.taskid)[0];
                     return ct;
                 }));
-        })
+        })*/
 }
