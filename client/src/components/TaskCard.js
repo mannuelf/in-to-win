@@ -143,9 +143,10 @@ const TaskCard = ({
       {open && (
         <StyledDescription open={open} onClick={handleOpenCard}>
           <StyledParagraph>{description}</StyledParagraph>
-          <TaskFileUploader />
+          
           {active ? (
             <>
+              <TaskFileUploader />
               <Button primary wide onClick={handleFinishTask}>
                 Mark as finished
               </Button>
