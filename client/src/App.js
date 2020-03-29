@@ -9,7 +9,6 @@ import styled from "styled-components";
 import theme from "./GlobalStyle/Theme";
 import Navbar from "./components/Navbar";
 import Toast from "./components/Toast";
-import HeaderCard from "././components/HeaderCard";
 import AskCoronaGo from "././pages/AskCoronaGo";
 
 import Modal from "react-responsive-modal";
@@ -64,7 +63,6 @@ function App(props) {
           <Modal open={showDialog} onClose={onCloseModal}>
             <AskCoronaGo />
           </Modal>
-          <LogoutButton onClick={handleLogout}>Log out</LogoutButton>
           {props.children}
           {/* <Toast
             title="Hello there"
@@ -118,18 +116,5 @@ const style_coronaBotBtn = {
   right: "3rem",
   zIndex: "11"
 };
-
-const LogoutButton = styled.div`
-  position: fixed;
-  bottom: 10rem;
-  left: 2rem;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: ${theme.colors.primary};
-  color: ${theme.colors.dark};
-  width: 80px;
-  text-align: center;
-  z-index: 11;
-`;
 
 export default App;
