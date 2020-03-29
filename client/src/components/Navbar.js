@@ -56,9 +56,9 @@ const Navbar = () => {
           <StyledIcon src={FriendsIcon} />
           Friends
         </StyledLink>
-        <StyledLink to="/leaderboard">
+        <StyledLink to="/affiliates">
           <StyledIcon src={RewardsIcon} />
-          Leaderboard
+          Affiliates
         </StyledLink>
         <StyledLink to="/profile">
           <StyledIcon src={ProfileIcon} />
