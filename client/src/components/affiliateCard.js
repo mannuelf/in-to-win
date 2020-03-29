@@ -5,7 +5,7 @@ import styled from "styled-components";
 import theme from "../GlobalStyle/Theme";
 
 const StyledWrapper = styled.div`
-  margin: 1.6rem 0;
+  margin: 1.6rem;
   padding: 1.6rem;
   overflow: hidden;
   border-radius: 1.5rem;

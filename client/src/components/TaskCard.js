@@ -20,7 +20,7 @@ const slideOut = keyframes`
 `;
 
 const CardWrapper = styled.div`
-  margin: 1.6rem 0;
+  margin: 1rem 0;
   width: 300px;
 `;
 const StyledWrapper = styled.div`
@@ -143,9 +143,10 @@ const TaskCard = ({
       {open && (
         <StyledDescription open={open} onClick={handleOpenCard}>
           <StyledParagraph>{description}</StyledParagraph>
-          <TaskFileUploader />
+          
           {active ? (
             <>
+              <TaskFileUploader />
               <Button primary wide onClick={handleFinishTask}>
                 Mark as finished
               </Button>

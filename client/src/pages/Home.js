@@ -5,8 +5,9 @@ import {
 } from '../api/api';
 import TaskCard from "../components/TaskCard";
 import styled from "styled-components";
+import { withRouter } from "react-router-dom";
 
-function Home() {
+function Home(props) {
 
   const user = JSON.parse(sessionStorage.getItem("User"));
 
@@ -20,7 +21,7 @@ function Home() {
       .then(tasks => {
         TaskAPI.getByUser(user.id)
           .then(customerTasks => tasks.map(task => {
-            task.customerTask = customerTasks.filter(ct => ct.taskid === ""+task.id)[0];
+            task.customerTask = customerTasks.filter(ct => ct.taskid === ""+task.id).slice().reverse()[0];
             return task;
           }))
           .then(taskList => {
@@ -37,15 +38,23 @@ function Home() {
     TaskAPI.start(taskId, user.id)
       .then((resp) => {
         const customerTask = resp.data;
-        setState({
-          ...state,
-          tasks: state.tasks.map(task => {
-            if (task.id === taskId) {
-              task.customerTask = customerTask;
-            }
-            return task;
+        const theTask = state.tasks.filter(task => {
+          return task.id === taskId;
+        })[0];
+        if (theTask.affiliate) {
+          props.history.push("/affiliates/"+theTask.affiliate);
+        }
+        else {
+          setState({
+            ...state,
+            tasks: state.tasks.map(task => {
+              if (task.id === taskId) {
+                task.customerTask = customerTask;
+              }
+              return task;
+            })
           })
-        })
+        }
       });
   }
 
@@ -117,4 +126,4 @@ const style_li = {
   listStyle: "none",
 }
 
-export default Home;
+export default withRouter(Home);

@@ -14,7 +14,7 @@ function Affiliates() {
   }, []);
   return (
     <div className="App">
-      <h1>Affiliates</h1>
+      <h1 style={style_h1}>Affiliates</h1>
       {affiliates.map((value, index) => {
         return (
           <AffiliateCard
@@ -29,6 +29,10 @@ function Affiliates() {
       })}
     </div>
   );
+}
+
+const style_h1 = {
+  textAlign: "center"
 }
 
 export default Affiliates;
