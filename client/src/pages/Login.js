@@ -45,21 +45,19 @@ function Login({ updateErrors, updateLoginStatus }) {
         <h2 style={style_heading}>Log in</h2>
         <Form onSubmit={handleSubmit}>
           {" "}
-          <input
+          <LoginInput
             type="text"
             name="username"
             onChange={handleChange}
             className=""
             placeholder="Username"
-            style={style_loginInput}
           />
-          <input
+          <LoginInput
             type="password"
             name="password"
             onChange={handleChange}
             className=""
             placeholder="Password"
-            style={style_loginInput}
           />
           <Button
             as="input"
@@ -115,17 +113,20 @@ const style_heading = {
   margin: "20px 0 60px 0"
 };
 
-const style_loginInput = {
-  border: "none",
-  borderBottom: `2pt solid ${theme.colors.primary}`,
-  backgroundColor: "transparent",
-  width: "100%",
-  paddingBottom: "5px",
-  paddingLeft: "5px",
-  fontSize: "24px",
-  color: `${theme.colors.text}`,
-  marginBottom: "16px"
-};
+const LoginInput = styled.input`
+  border: none;
+  border-bottom: 2pt solid ${theme.colors.primary};
+  background-color: transparent;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  font-size: 24px;
+  color: ${theme.colors.text};
+  margin-bottom: 16px;
+  :focus {
+    outline: none;
+  }
+`;
 
 const Form = styled.form`
   border: 5px 5px 0 0;
