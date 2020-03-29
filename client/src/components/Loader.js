@@ -2,7 +2,7 @@ import React from "react";
 import theme from "../GlobalStyle/Theme";
 import "../scss/styles.scss";
 
-function Loader(props) {
+function Loader({ message }) {
   return (
     <div style={style_container}>
       <div className="coronaBot" style={style_coronaBot}>
@@ -21,7 +21,7 @@ function Loader(props) {
           <path d="M76.34,58.34a8,8,0,1,0,11.32,0A8,8,0,0,0,76.34,58.34Zm8.49,8.49a4,4,0,1,1,0-5.66A4,4,0,0,1,84.83,66.83Z" />
           <path d="M58.34,76.34a8,8,0,1,0,11.32,0A8,8,0,0,0,58.34,76.34Zm8.49,8.49a4,4,0,1,1,0-5.66A4,4,0,0,1,66.83,84.83Z" />
         </svg>
-        <p style={style_p}> Please wait...</p>
+        <p style={style_p}> {message}</p>
       </div>{" "}
     </div>
   );
@@ -35,6 +35,9 @@ const style_p = {
 };
 
 const style_container = {
+  width: "100vw",
+  height: "100vh",
+  position: "fixed",
   display: "flex",
   justifyContent: "center",
   marginTop: "30vh",

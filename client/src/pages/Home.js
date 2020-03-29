@@ -63,6 +63,23 @@ function Home() {
             return task;
           })
         })
+      })
+  };
+  
+    
+  function handleCancel(customerTaskId) {
+    console.log("cancel");
+    TaskAPI.cancel(customerTaskId)
+      .then(() => {
+        setState({
+          ...state,
+          tasks: state.tasks.map(task => {
+            if (task.customerTask && task.customerTask.id === customerTaskId) {
+              task.customerTask = undefined;
+            }
+            return task;
+          })
+        })
       });
   }
 
@@ -77,7 +94,7 @@ function Home() {
               id={task.id} title={task.name} description={task.description} difficulty={task.difficulty}
               customerTaskId={task.customerTask && task.customerTask.id}
               status={task.customerTask && task.customerTask.status}
-              handleAccepted={handleAccepted} handleFinished={handleCompleted} />
+              handleAccepted={handleAccepted} handleFinished={handleCompleted} handleCancel={handleCancel} />
           </li>
         ))}
       </StyledUl>

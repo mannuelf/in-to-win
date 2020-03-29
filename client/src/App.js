@@ -101,7 +101,11 @@ function App(props) {
 }
 
 const style_coronaBot = {
-  width: "64px"
+  width: "72px",
+  backgroundColor: `${theme.colors.bg}`,
+  padding: "8px",
+  borderRadius: "50px",
+  zIndex: "11"
 };
 
 const style_coronaBotBtn = {
@@ -109,9 +113,10 @@ const style_coronaBotBtn = {
   border: "none",
   outline: "none",
   width: "64px",
-  position: "absolute",
+  position: "fixed",
   bottom: "10rem",
-  right: "3rem"
+  right: "3rem",
+  zIndex: "11"
 };
 
 export default App;

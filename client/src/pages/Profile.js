@@ -18,6 +18,12 @@ function Profile() {
   return (
     <div>
       <h1>Profile</h1>
+      <HeaderCard
+        username={username}
+        firstName={firstName}
+        profileImgUrl={profileImgUrl}
+        points={points}
+        />
       <div>
         <h2>Tasks Completed</h2>
       </div>
@@ -25,5 +31,12 @@ function Profile() {
     </div>
   );
 }
+
+const style_container = {
+  display: "flex",
+  justtifyContent: "center",
+  flexDirection: "column",
+  padding: "0 16px"
+};
 
 export default Profile;

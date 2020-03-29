@@ -99,6 +99,7 @@ const TaskCard = ({
   customerTaskId = -1,
   handleAccepted = () => { },
   handleFinished = () => { },
+  handleCancel = () => { },
 }) => {
   const [open, setOpen] = useState(isOpen);
   const [active, setActive] = useState(status === CUSTOMER_TASK_STATUS.Started);
@@ -114,6 +115,10 @@ const TaskCard = ({
   const handleAcceptedClicked = () => {
     setActive(true);
     handleAccepted(id);
+  }
+  const handleCancelClicked = () => {
+    setActive(false);
+    handleCancel(customerTaskId);
   }
   return (
     <CardWrapper>
@@ -141,7 +146,7 @@ const TaskCard = ({
               <Button primary wide onClick={handleFinishTask}>
                 Mark as finished
               </Button>
-              <Button outline wide onClick={() => setActive(false)}>
+              <Button outline wide onClick={handleCancelClicked}>
                 Cancel task
               </Button>
             </>
