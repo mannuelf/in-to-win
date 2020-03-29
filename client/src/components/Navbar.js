@@ -27,6 +27,7 @@ const MarginTop = styled.div`
 const StyledIcon = styled.img`
   width: 24px;
   height: 24px;
+  filter: brightness(0) invert(1);
 `;
 const NavWrapper = styled.nav`
   padding: 1.6rem 0;
