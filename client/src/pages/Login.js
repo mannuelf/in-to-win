@@ -7,19 +7,37 @@ import theme from "../GlobalStyle/Theme";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
 
-const Form = styled.form`
+const Section = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   flex-direction: column;
-  border: 5px 5px 0 0;
-  background-color: ${theme.colors.grey};
+  height: 100vh;
   width: 100%;
-  max-height: 800px;
 `;
 
+const Top = styled.div`
 
-const ColouredSpan = styled.span``;
+`;
+
+const ColouredSpan = styled.span`
+  color: ${theme.colors.primary};
+`;
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: center;
+  max-height: 500px;
+  background-color: ${theme.colors.grey};
+  margin-bottom: -32px;
+  border-radius: 40px 40px 0 0;
+`;
+
+const FormCont = styled.div`
+  max-width: 200px;
+  padding: 50px 0;
+  
+`;
+
 function Login({ updateErrors, updateLoginStatus }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -49,36 +67,41 @@ function Login({ updateErrors, updateLoginStatus }) {
   };
 
   return (
-    <div>
-      <h1>InToWin</h1>
-      <span>The more you in, the more you win.</span>
-      <div>
-        <Form onSubmit={handleSubmit}>
-          <h2>Username</h2>
-          <input
-            type="text"
-            name="username"
-            onChange={handleChange}
-            className=""
-          />
-          <h2>Password</h2>
-          <input
-            type="password"
-            name="password"
-            onChange={handleChange}
-            className=""
-          />
-          <Button
-            as="input"
-            primary
-            wide
-            type="submit"
-            name="submit"
-            value="Log in"
-          />
-        </Form>
-      </div>
-    </div>
+    <Section>
+      <Top>
+        <h1>InToWin</h1>
+        <span>The more <ColouredSpan>you in</ColouredSpan>, the more <ColouredSpan>you win</ColouredSpan>.</span>
+      </Top>
+      <Bottom>
+        <FormCont>
+          <form onSubmit={handleSubmit}>
+            <h2>Username</h2>
+            <input
+              type="text"
+              name="username"
+              onChange={handleChange}
+              className=""
+            />
+            <h2>Password</h2>
+            <input
+              type="password"
+              name="password"
+              onChange={handleChange}
+              className=""
+            />
+            <Button
+              as="input"
+              primary
+              wide
+              type="submit"
+              name="submit"
+              value="Log in"
+            />
+          </form>
+        </FormCont>
+      </Bottom>
+
+    </Section>
   );
 }
 

@@ -17,7 +17,6 @@ const LoginCont = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100%;
-  margin-top: -16px;
   text-align: center;
 `;
 
