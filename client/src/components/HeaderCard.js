@@ -5,26 +5,27 @@ import theme from "../GlobalStyle/Theme";
 const HeaderCardContainer = styled.div`
   background-color: ${theme.gradient};
   display: flex;
+  justify-content: space-between;
+`;
+
+const MediaCardWrapper = styled.div`
+  display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  margin-left: 30px;
 `;
 
 const HeaderCardImage = styled.div`
-  width: 100%;
-`;
 
-const HeaderCardMedia = styled.div`
-  flex-grow: 64px;
 `;
 
 const HeaderCardContent = styled.div`
- flex-grow: 2;
  padding: .5em;
+ padding-left: 1em;
 `;
 
 const HeaderCardPoints = styled.div`
- flex-grow: 2;
  padding: .5em;
+ margin-right: 30px;
 `;
 
 const coverImg = {
@@ -36,18 +37,20 @@ const coverImg = {
 function HeaderCard({username, firstName, profileImgUrl, points}) {
   return(
     <HeaderCardContainer>
-        <HeaderCardMedia>
+      <MediaCardWrapper>
+        <div>
           <HeaderCardImage />
           <img style={coverImg} src={profileImgUrl} alt={firstName} />
-        </HeaderCardMedia>
+        </div>
         <HeaderCardContent>
           <div>@{username}</div>
           <div className="header-card-content-subtitle">{points}</div>
         </HeaderCardContent>
-        <HeaderCardPoints>
-          <div>Rank: 1000</div>
-          <div>🙂</div>
-        </HeaderCardPoints>
+      </MediaCardWrapper>
+      <HeaderCardPoints>
+        <div>Rank: 1000</div>
+        <div>🙂</div>
+      </HeaderCardPoints>
     </HeaderCardContainer>
   )
 }

@@ -9,7 +9,6 @@ import styled from "styled-components";
 import theme from "./GlobalStyle/Theme";
 import Navbar from "./components/Navbar";
 import Toast from "./components/Toast";
-import HeaderCard from "././components/HeaderCard";
 import AskCoronaGo from "././pages/AskCoronaGo";
 
 import Modal from "react-responsive-modal";
