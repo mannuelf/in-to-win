@@ -85,7 +85,7 @@ function Home() {
 
   return (
     <div className="App">
-      <h1 style={styled_h1}>Home Page</h1>
+      <h1 style={styled_h1}>Challenges</h1>
 
       <StyledUl>
         {state.tasks.map(task => (
