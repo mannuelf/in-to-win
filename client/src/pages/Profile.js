@@ -18,6 +18,12 @@ function Profile() {
   return (
     <div>
       <h1>Profile</h1>
+      <HeaderCard
+        username={username}
+        firstName={firstName}
+        profileImgUrl={profileImgUrl}
+        points={points}
+        />
       <div>
         <h2>Tasks Completed</h2>
       </div>
