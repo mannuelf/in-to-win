@@ -21,7 +21,7 @@ const slideOut = keyframes`
 
 const CardWrapper = styled.div`
   margin: 1.6rem 0;
-  width: 350px;
+  width: 300px;
 `;
 const StyledWrapper = styled.div`
   padding: 1.6rem;
