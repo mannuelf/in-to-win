@@ -25,6 +25,11 @@ export function start(taskId, userId) {
         });
 }
 
+export function cancel(customerTaskId) {
+    return Axios
+        .delete(BASE_URL + CUSTOMER_TASKS + "/" + customerTaskId);
+}
+
 export function getAll() {
     return Axios.get(BASE_URL + TASKS)
         .then(taskResp => taskResp.data);
