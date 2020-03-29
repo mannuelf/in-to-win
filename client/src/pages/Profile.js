@@ -17,14 +17,14 @@ function Profile() {
   const profileImgUrl = user.profileimage.length ? imgUrl : noImgUrl;
   return (
     <div>
-      <div style={style_container}>
-        <h1>Profile</h1>
-        <HeaderCard
-          username={username}
-          firstName={firstName}
-          profileImgUrl={profileImgUrl}
-          points={points}
+      <h1>Profile</h1>
+      <HeaderCard
+        username={username}
+        firstName={firstName}
+        profileImgUrl={profileImgUrl}
+        points={points}
         />
+      <div>
         <h2>Tasks Completed</h2>
       </div>
       <TaskCard />
