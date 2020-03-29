@@ -15,7 +15,7 @@ const Button = styled.button`
   color: ${({ outline }) =>
     outline ? theme.colors.primary : theme.colors.dark};
   font-weight: 400;
-  font-size: ${() => theme.sizes.small};
+  font-size: ${theme.sizes.small};
   border-radius: 25px;
   border-color: ${theme.colors.primary};
   background: ${({ primary }) => (primary ? theme.colors.primary : "none")};
@@ -28,8 +28,8 @@ const Button = styled.button`
   :active,
   :focus {
     opacity: 0.9;
-    background: ${() => theme.colors.primary};
-    color: ${() => theme.colors.dark};
+    background: ${theme.colors.primary};
+    color: ${theme.colors.dark};
   }
 
   :disabled {

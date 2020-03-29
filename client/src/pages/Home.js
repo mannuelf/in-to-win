@@ -4,6 +4,7 @@ import {
   User as UserAPI 
 } from '../api/api';
 import TaskCard from "../components/TaskCard";
+import styled from "styled-components";
 
 function Home() {
 
@@ -69,9 +70,9 @@ function Home() {
     <div className="App">
       <h1>Home Page</h1>
 
-      <ul>
+      <StyledUl>
         {state.tasks.map(task => (
-          <li key={task.id}>
+          <li style={style_li} key={task.id}>
             <TaskCard
               id={task.id} title={task.name} description={task.description} difficulty={task.difficulty}
               customerTaskId={task.customerTask && task.customerTask.id}
@@ -79,9 +80,20 @@ function Home() {
               handleAccepted={handleAccepted} handleFinished={handleCompleted} />
           </li>
         ))}
-      </ul>
+      </StyledUl>
     </div>
   );
+}
+
+const StyledUl = styled.ul`
+  padding: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+const style_li = {
+  listStyle: "none",
 }
 
 export default Home;

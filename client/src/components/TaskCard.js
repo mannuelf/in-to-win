@@ -20,6 +20,7 @@ const slideOut = keyframes`
 
 const CardWrapper = styled.div`
   margin: 1.6rem 0;
+  width: 350px;
 `;
 const StyledWrapper = styled.div`
   padding: 1.6rem;
@@ -122,7 +123,6 @@ const TaskCard = ({
           Level: <StyledSpan primary>{difficulty}</StyledSpan>
         </StyledParagraph>
         <StyledDiv>
-          <StyledParagraph faded>Suggested by:</StyledParagraph>
           <StyledAuthor spaced>
             <StyledAuthor>
               <StyledAvatar imgSrc={avatarSrc} />
