@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
 import brain from "brain.js";
+import Loader from "../components/Loader";
+import LoadingGif from "./../assets/gifs/ai-orb-transparent.gif";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
   const [theAnswer, setTheAnswer] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
   let trainedNet;
 
   const encode = arg => {
@@ -53,7 +56,6 @@ function AskCoronaGo() {
         trainedNet = net.toFunction();
         console.log("Finished training...");
         let answer = execute(coronaQuery);
-        setTheAnswer(answer);
         //document.getElementById("theResult").innerHTML = answer;
       });
   }
@@ -61,7 +63,9 @@ function AskCoronaGo() {
   const execute = input => {
     let results = trainedNet(encode(input));
     let output = results.true > results.false ? "true" : "false";
-    console.log(output);
+    setTheAnswer(output);
+    setShowLoading(false);
+
     // let output;
     // results.true > results.false
     //   ? (output = `<h3> The answer is <b>correct</b> <span class="glyphicon glyphicon-ok" aria-hidden="true"></h3></div>`)
@@ -75,22 +79,43 @@ function AskCoronaGo() {
 
   const handleSubmit = e => {
     e.preventDefault();
+    setShowLoading(true);
     train();
   };
 
   return (
     <div className="App">
-      <h1>Get your facts straight about the Corona virus</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="coronaQuestion"
-          className=""
-          onChange={handleChange}
-        />
-        <input type="submit" />
-      </form>
+      {!showLoading ? (
+        <>
+          <h1>Ask Corona Buster a question about the Corona Virus</h1>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="coronaQuestion"
+              className=""
+              onChange={handleChange}
+            />
+            <input type="submit" />
+
+            <br />
+            <br />
+            <br />
+            {theAnswer}
+          </form>
+        </>
+      ) : (
+        <div>
+          <img src={LoadingGif} alt="brain gif" width="100%" />
+        </div>
+      )}
     </div>
   );
 }
+
+const style_container = {
+  width: "100vw",
+  height: "100vh",
+  margin: "0",
+  padding: "0"
+};
 export default AskCoronaGo;

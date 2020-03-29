@@ -4,31 +4,50 @@ import theme from "../GlobalStyle/Theme";
 
 const HeaderCardContainer = styled.div`
   background-color: ${theme.gradient};
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 `;
 
 const HeaderCardImage = styled.div`
   width: 100%;
 `;
 
+const HeaderCardMedia = styled.div`
+  flex-grow: 64px;
+`;
+
+const HeaderCardContent = styled.div`
+ flex-grow: 2;
+ padding: .5em;
+`;
+
+const HeaderCardPoints = styled.div`
+ flex-grow: 2;
+ padding: .5em;
+`;
+
 const coverImg = {
-  width: "100%"
+  width: "64px",
+  height: "64px",
+  "border-radius": "50%"
 };
 
 function HeaderCard({username, firstName, profileImgUrl, points}) {
   return(
     <HeaderCardContainer>
-      <div className="header-card-media">
-        <div className="header-card-media-left">
+        <HeaderCardMedia>
           <HeaderCardImage />
-          <figure className="header-card-image">
-            <img style={coverImg} src={profileImgUrl} alt={firstName} />
-          </figure>
-        </div>
-        <div className="header-card-media-content">
-          <p className="header-card-content-title">@{username}</p>
-          <p className="header-card-content-subtitle">{points}</p>
-        </div>
-      </div>
+          <img style={coverImg} src={profileImgUrl} alt={firstName} />
+        </HeaderCardMedia>
+        <HeaderCardContent>
+          <div>@{username}</div>
+          <div className="header-card-content-subtitle">{points}</div>
+        </HeaderCardContent>
+        <HeaderCardPoints>
+          <div>Rank: 1000</div>
+          <div>🙂</div>
+        </HeaderCardPoints>
     </HeaderCardContainer>
   )
 }

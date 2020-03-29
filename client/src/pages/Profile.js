@@ -18,17 +18,6 @@ function Profile() {
   return (
     <div>
       <h1>Profile</h1>
-      <HeaderCard
-        url={profileImgUrl}
-        username={username}
-        firstName={firstName}
-        profileImgUrl={profileImgUrl}
-        points={points}
-      />
-      <div>
-        {firstName} {lastName}
-      </div>
-      <Button primary>Edit Profile</Button>
       <div>
         <h2>Tasks Completed</h2>
       </div>

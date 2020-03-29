@@ -18,7 +18,9 @@ function Affiliates() {
       {affiliates.map((value, index) => {
         return (
           <AffiliateCard
+            withButton
             key={index}
+            id={value.id}
             name={value.name}
             description={value.description}
             logo={IMG_URL + value.logo.url}

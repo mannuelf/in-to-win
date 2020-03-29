@@ -1,15 +1,19 @@
 import { CUSTOMER_TASKS, BASE_URL, CUSTOMER_TASK_STATUS, TASKS } from "../constants/constants";
 import Axios from "axios";
 
-export function complete(taskId, userId) {
+export function complete(customerTaskId, image = null) {
     //TODO: add image
+    console.log("image", image);
 
+    const formData = new FormData();
+    formData.append("data", JSON.stringify({
+        status: CUSTOMER_TASK_STATUS.Complete,
+    }));
+    if (image) {
+        formData.append("files.image", image);
+    }
     return Axios
-        .post(BASE_URL + CUSTOMER_TASKS, {
-            taskid: ""+taskId,
-            customerid: "" + userId,
-            status: CUSTOMER_TASK_STATUS.Complete,
-        });
+        .put(BASE_URL + CUSTOMER_TASKS + "/" + customerTaskId, formData);
 }
 
 export function start(taskId, userId) {
@@ -20,7 +24,6 @@ export function start(taskId, userId) {
             status: CUSTOMER_TASK_STATUS.Started,
         });
 }
-
 
 export function getAll() {
     return Axios.get(BASE_URL + TASKS)
@@ -48,6 +51,7 @@ export function getStartedByUser(userId) {
  Helpers
 */
 
+
 function getUserTasksByUrl(url) {
     return Axios.get(url)
         .then(resp => {
@@ -57,8 +61,14 @@ function getUserTasksByUrl(url) {
             return Promise.reject("No customertasks found.");
         })
         .then(custTasks => {
+            // get the tasks for each customertask
             const taskIds = custTasks.map(ct => "id_in=" + ct.taskid).join("&");
-            return Axios.get(BASE_URL + TASKS + '?' + taskIds);
+            return Axios.get(BASE_URL + TASKS + '?' + taskIds)
+                .then(taskResp => taskResp.data)
+                // then return the customertask with the tasks added to a 'task' property
+                .then(tasks => custTasks.map(ct => {
+                    ct.task = tasks.filter(task => ""+task.id === ct.taskid)[0];
+                    return ct;
+                }));
         })
-        .then(taskResp => taskResp.data)
 }
