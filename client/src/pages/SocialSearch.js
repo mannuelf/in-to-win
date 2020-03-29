@@ -8,6 +8,7 @@ import {
 } from "../constants/constants";
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
+import theme from "../GlobalStyle/Theme";
 
 function SocialSearch() {
   const [users, setUsers] = useState([]);
@@ -64,9 +65,16 @@ function SocialSearch() {
 
   return (
     <div className="App">
-      <h1>Search For a Friend</h1>
-      <form>
-        <input type="text" name="search" className="" onChange={handleChange} />
+      <form style={style_form}>
+        <h1 style={style_heading}>People to Follow</h1>
+        <input
+          type="text"
+          name="search"
+          placeholder="Search a person here..."
+          className=""
+          onChange={handleChange}
+          style={style_searchInput}
+        />
       </form>
       <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
@@ -96,8 +104,34 @@ function SocialSearch() {
   );
 }
 
+const { colors } = theme;
+
 const style_cardDeck = {
   padding: "32px 16px 0"
+};
+
+const style_form = {
+  margin: "0 16px"
+};
+
+const style_searchInput = {
+  width: "100%",
+  padding: "8px 0",
+  fontSize: "16px",
+  color: `${colors.text}`,
+  backgroundColor: "transparent",
+  borderTop: "none",
+  borderLeft: "none",
+  borderRight: "none",
+  borderBottom: "2pt, solid, white"
+};
+
+const style_heading = {
+  width: "100%",
+  textAlign: "center",
+  fontSize: "16px",
+  fontWeight: "400",
+  margin: "32px 0"
 };
 
 export default SocialSearch;

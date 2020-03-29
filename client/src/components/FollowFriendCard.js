@@ -1,5 +1,6 @@
 import React from "react";
 import FollowButton from "./common/FollowButton";
+import theme from "../GlobalStyle/Theme";
 
 function FollowFriendCard({
   image,
@@ -31,16 +32,18 @@ function FollowFriendCard({
   );
 }
 
+const { colors, gradient, shadow } = theme;
+
 const style_FFC = {
   display: "flex",
   justifyContent: "space-between",
   padding: "16px",
-  color: "white",
+  color: `${colors.text}`,
   fontSize: "16px",
   borderRadius: "10px",
   marginBottom: "8px",
-  backgroundColor: "#3B4046",
-  boxShadow: "0px 4px 16px rgba(0,0,0,.25)"
+  background: `${gradient}`,
+  boxShadow: `${shadow}`
 };
 
 const style_IMG = {

@@ -7,19 +7,6 @@ import theme from "../GlobalStyle/Theme";
 
 import { BASE_URL, AUTH_URL } from "../constants/constants";
 
-const Form = styled.form`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  border: 5px 5px 0 0;
-  background-color: ${theme.colors.grey};
-  width: 100%;
-  max-height: 800px;
-`;
-
-
-const ColouredSpan = styled.span``;
 function Login({ updateErrors, updateLoginStatus }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +22,7 @@ function Login({ updateErrors, updateLoginStatus }) {
         sessionStorage.setItem("JWT", response.data.jwt);
         sessionStorage.setItem("User", JSON.stringify(response.data.user));
         updateLoginStatus();
-        window.location.reload();
+        window.location = "/";
       })
       .catch(() => {
         updateErrors();
@@ -44,29 +31,36 @@ function Login({ updateErrors, updateLoginStatus }) {
 
   const handleChange = input => {
     let name = input.target.name;
-    let value = input.target.value.toLowerCase();
+    let value = input.target.value;
     name === "username" ? setUsername(value) : setPassword(value);
   };
 
   return (
     <div>
-      <h1>InToWin</h1>
-      <span>The more you in, the more you win.</span>
-      <div>
+      <div className="logo-container" style={style_logoContainer}>
+        <h1>InToWin</h1>
+        <span>
+          The more <span style={style_spanColor}>you in</span>, the more{" "}
+          <span style={style_spanColor}>you win</span>.
+        </span>
+      </div>
+      <div style={style_loginForm}>
+        <h2 style={style_heading}>Log in</h2>
         <Form onSubmit={handleSubmit}>
-          <h2>Username</h2>
-          <input
+          {" "}
+          <LoginInput
             type="text"
             name="username"
             onChange={handleChange}
             className=""
+            placeholder="Username"
           />
-          <h2>Password</h2>
-          <input
+          <LoginInput
             type="password"
             name="password"
             onChange={handleChange}
             className=""
+            placeholder="Password"
           />
           <Button
             as="input"
@@ -75,11 +69,86 @@ function Login({ updateErrors, updateLoginStatus }) {
             type="submit"
             name="submit"
             value="Log in"
+            style={style_loginButton}
           />
         </Form>
       </div>
     </div>
   );
 }
+
+const style_loginForm = {
+  width: "100%",
+  marginTop: "64px",
+  height: "50vh",
+  padding: "16px",
+  boxSizing: "border-box",
+  backgroundColor: `${theme.colors.grey}`,
+  position: "absolute",
+  bottom: "0",
+  left: "0",
+  borderTopLeftRadius: "20px",
+  borderTopRightRadius: "20px"
+};
+
+const style_logoContainer = {
+  width: "100%",
+  paddingTop: "64px",
+  height: "40vh",
+  position: "absolute",
+  top: "0",
+  left: "0"
+};
+
+const style_spanColor = {
+  color: `${theme.colors.primary}`
+};
+
+const style_heading = {
+  width: "100%",
+  textAlign: "center",
+  fontSize: "25px",
+  fontWeight: "400",
+  margin: "20px 0 60px 0"
+};
+
+const LoginInput = styled.input`
+  border: none;
+  border-bottom: 2pt solid ${theme.colors.primary};
+  background-color: transparent;
+  width: 100%;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  font-size: 24px;
+  color: ${theme.colors.text};
+  margin-bottom: 16px;
+  :focus {
+    outline: none;
+  }
+`;
+
+const Form = styled.form`
+  border: 5px 5px 0 0;
+  width: 100%;
+  max-height: 800px;
+  margin-bottom: 40px;
+`;
+
+const style_loginButton = {
+  marginTop: "30px"
+};
+
+const style_policyCont = {
+  position: "absolute",
+  bottom: "20px",
+  left: "0",
+  width: "100%"
+};
+
+const style_policy = {
+  margin: "30px",
+  color: `${theme.colors.text}`,
+  textDecoration: "none"
+};
 
 export default Login;
