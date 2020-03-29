@@ -81,7 +81,7 @@ function Login({ updateErrors, updateLoginStatus }) {
 const style_loginForm = {
   width: "100%",
   marginTop: "64px",
-  height: "70vh",
+  height: "50vh",
   padding: "16px",
   boxSizing: "border-box",
   backgroundColor: `${theme.colors.grey}`,
@@ -136,7 +136,7 @@ const Form = styled.form`
 `;
 
 const style_loginButton = {
-  marginTop: "50px"
+  marginTop: "30px"
 }
 
 const style_policyCont = {
