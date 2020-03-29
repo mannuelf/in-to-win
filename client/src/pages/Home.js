@@ -21,7 +21,7 @@ function Home(props) {
       .then(tasks => {
         TaskAPI.getByUser(user.id)
           .then(customerTasks => tasks.map(task => {
-            task.customerTask = customerTasks.filter(ct => ct.taskid === ""+task.id)[0];
+            task.customerTask = customerTasks.filter(ct => ct.taskid === ""+task.id).slice().reverse()[0];
             return task;
           }))
           .then(taskList => {
