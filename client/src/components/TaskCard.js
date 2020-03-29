@@ -20,7 +20,7 @@ const slideOut = keyframes`
 `;
 
 const CardWrapper = styled.div`
-  margin: 1.6rem 0;
+  margin: 1rem 0;
   width: 300px;
 `;
 const StyledWrapper = styled.div`
