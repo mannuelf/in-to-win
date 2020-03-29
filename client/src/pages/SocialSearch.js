@@ -9,6 +9,8 @@ import {
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
 import theme from "../GlobalStyle/Theme";
+import Button from "../components/Button";
+import { Link } from "react-router-dom";
 
 function SocialSearch() {
   const [users, setUsers] = useState([]);
@@ -65,6 +67,9 @@ function SocialSearch() {
 
   return (
     <div className="App">
+      <Link to="/leaderboard" style={container_leaderboardBtn}>
+        <button style={style_leaderboardBtn}>Leaderboard</button>
+      </Link>
       <form style={style_form}>
         <h1 style={style_heading}>People to Follow</h1>
         <input
@@ -76,6 +81,7 @@ function SocialSearch() {
           style={style_searchInput}
         />
       </form>
+
       <div style={style_cardDeck}>
         {filteredUsers.length > 0 ? (
           filteredUsers.map((value, key) => {
@@ -132,6 +138,21 @@ const style_heading = {
   fontSize: "16px",
   fontWeight: "400",
   margin: "32px 0"
+};
+
+const container_leaderboardBtn = {
+  position: "fixed",
+  bottom: "11rem",
+  left: "2rem"
+};
+
+const style_leaderboardBtn = {
+  fontSize: "16px",
+  padding: "16px",
+  borderRadius: "50px",
+  border: "none",
+  backgroundColor: `${theme.colors.primary}`,
+  shadowBox: `${theme.shadow}`
 };
 
 export default SocialSearch;
