@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import theme from "../GlobalStyle/Theme";
 import Button from "../components/Button";
 import ArrowSvg from "../assets/icons/svg/arrow-ios-downward-outline.svg";
+import { CUSTOMER_TASK_STATUS } from "../constants/constants";
 
 const slideOut = keyframes`
 0% {
@@ -84,22 +85,35 @@ const StyledArrow = styled.img`
 `;
 
 const TaskCard = ({
+  id = -1,
   title = "Unknown task",
   difficulty = "Easy",
   avatarSrc = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80",
   author = "Bon Jovi",
-  description = "This is a task for you, do it and earn points"
+  description = "This is a task for you, do it and earn points",
+  // state
+  isOpen = false,
+  status,
+  // API
+  customerTaskId = -1,
+  handleAccepted = () => { },
+  handleFinished = () => { },
 }) => {
-  const [open, setOpen] = useState(false);
-  const [active, setActive] = useState(false);
-  const [finished, setFinished] = useState(false);
+  const [open, setOpen] = useState(isOpen);
+  const [active, setActive] = useState(status === CUSTOMER_TASK_STATUS.Started);
+  const [finished, setFinished] = useState(status === CUSTOMER_TASK_STATUS.Complete);
   const handleOpenCard = () => {
     setOpen(!open);
   };
 
   const handleFinishTask = () => {
     setFinished(true);
+    handleFinished(customerTaskId);
   };
+  const handleAcceptedClicked = () => {
+    setActive(true);
+    handleAccepted(id);
+  }
   return (
     <CardWrapper>
       <StyledWrapper active={active} open={open} onClick={handleOpenCard}>
@@ -132,7 +146,7 @@ const TaskCard = ({
               </Button>
             </>
           ) : (
-            <Button primary wide onClick={() => setActive(true)}>
+            <Button primary wide onClick={handleAcceptedClicked}>
               Accept task
             </Button>
           )}
