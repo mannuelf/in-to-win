@@ -4,6 +4,7 @@ import theme from "../GlobalStyle/Theme";
 import Button from "../components/Button";
 import ArrowSvg from "../assets/icons/svg/arrow-ios-downward-outline.svg";
 import { CUSTOMER_TASK_STATUS } from "../constants/constants";
+import TaskFileUploader from "./../pages/FileUpload";
 
 const slideOut = keyframes`
 0% {
@@ -20,7 +21,7 @@ const slideOut = keyframes`
 
 const CardWrapper = styled.div`
   margin: 1.6rem 0;
-  width: 350px;
+  width: 300px;
 `;
 const StyledWrapper = styled.div`
   padding: 1.6rem;
@@ -97,13 +98,15 @@ const TaskCard = ({
   status,
   // API
   customerTaskId = -1,
-  handleAccepted = () => { },
-  handleFinished = () => { },
-  handleCancel = () => { },
+  handleAccepted = () => {},
+  handleFinished = () => {},
+  handleCancel = () => {}
 }) => {
   const [open, setOpen] = useState(isOpen);
   const [active, setActive] = useState(status === CUSTOMER_TASK_STATUS.Started);
-  const [finished, setFinished] = useState(status === CUSTOMER_TASK_STATUS.Complete);
+  const [finished, setFinished] = useState(
+    status === CUSTOMER_TASK_STATUS.Complete
+  );
   const handleOpenCard = () => {
     setOpen(!open);
   };
@@ -115,11 +118,11 @@ const TaskCard = ({
   const handleAcceptedClicked = () => {
     setActive(true);
     handleAccepted(id);
-  }
+  };
   const handleCancelClicked = () => {
     setActive(false);
     handleCancel(customerTaskId);
-  }
+  };
   return (
     <CardWrapper>
       <StyledWrapper active={active} open={open} onClick={handleOpenCard}>
@@ -140,7 +143,7 @@ const TaskCard = ({
       {open && (
         <StyledDescription open={open} onClick={handleOpenCard}>
           <StyledParagraph>{description}</StyledParagraph>
-
+          <TaskFileUploader />
           {active ? (
             <>
               <Button primary wide onClick={handleFinishTask}>

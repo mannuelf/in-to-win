@@ -33,7 +33,7 @@ function TaskFileUploader() {
 
   return (
     <div>
-      <h3>Upload images for your task</h3>
+      <h3>Pictures, or we wont believe it!</h3>
       <form onSubmit={handleSubmit} id="form">
         <input type="hidden" name="id" value={userid} />
         <input

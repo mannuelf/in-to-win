@@ -1,5 +1,6 @@
 import React from "react";
 import { IMG_URL } from "../constants/constants";
+import styled from "styled-components";
 import TaskCard from "../components/TaskCard";
 import Button from "../components/Button";
 import HeaderCard from "../components/HeaderCard";
@@ -17,19 +18,23 @@ function Profile() {
   const profileImgUrl = user.profileimage.length ? imgUrl : noImgUrl;
   return (
     <div>
-      <h1>Profile</h1>
+      <h1 style={style_h1}>Profile</h1>
       <HeaderCard
         username={username}
         firstName={firstName}
         profileImgUrl={profileImgUrl}
         points={points}
         />
-      <div>
+      <CompletedWrap>
         <h2>Tasks Completed</h2>
-      </div>
-      <TaskCard />
+        <TaskCard />
+      </CompletedWrap>
     </div>
   );
+}
+
+const style_h1 = {
+  textAlign: "center"
 }
 
 const style_container = {
@@ -38,5 +43,13 @@ const style_container = {
   flexDirection: "column",
   padding: "0 16px"
 };
+
+const CompletedWrap = styled.div`
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 
 export default Profile;
