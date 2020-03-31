@@ -1,26 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BASE_URL, CORONA_FACTS } from "../constants/constants";
 import brain from "brain.js";
-import LoadingGif from "./../assets/gifs/ai-orb-transparent.gif";
 import theme from "../GlobalStyle/Theme";
-import Button from "../components/Button";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
-  const [theAnswer, setTheAnswer] = useState([
-    "Hi! I'm a AI based Fact Checker. How can I help you?"
+  const [convoRecord, setConvoRecord] = useState([]);
+  const [chatLog, setChatLog] = useState([
+    {
+      id: "bot",
+      message: "Hi! I'm an AI based Fact Checker. How can I help you?"
+    }
   ]);
-  const [botChat, setBotChat] = useState([]);
 
-  const [showLoading, setShowLoading] = useState(false);
+  const getUserAndBotConvo = () => {
+    const convoRecordClone = convoRecord;
+    const recorded = chatLog.slice(-2);
+    convoRecordClone.push(recorded);
+    setConvoRecord(convoRecordClone);
+  };
+
+  const [userChat, setUserChat] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(getUserAndBotConvo, [chatLog]);
+  useEffect(scrollToBottom);
+
+  console.log({ convoRecord });
+
   let trainedNet;
-
-  const botAnswer = [...botChat];
-
-  useEffect(() => {
-    botAnswer.push(theAnswer && theAnswer);
-    setBotChat(botAnswer);
-  }, [theAnswer]);
 
   const encode = arg => {
     var input = [];
@@ -62,12 +75,12 @@ function AskCoronaGo() {
         let fixedData = fixLengths(filteredResult);
         let net = new brain.NeuralNetwork();
         net.train(fixedData, {
-          iterations: 200,
+          iterations: 10,
           log: true
         });
         trainedNet = net.toFunction();
         console.log("Finished training...");
-        let answer = execute(coronaQuery);
+        const answer = execute(coronaQuery);
       });
   }
 
@@ -77,18 +90,28 @@ function AskCoronaGo() {
       results.true > results.false
         ? "Your answer is correct"
         : "Your answer is incorrect";
-    const answers = [output];
-    setTheAnswer(answers);
-    setShowLoading(false);
+    const chatLogClone = chatLog;
+    chatLogClone.push({ id: "bot", message: output });
+    setChatLog(chatLogClone);
+
+    setIsLoading(false);
   };
 
   const handleChange = input => {
     setCoronaQuery(input.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    setShowLoading(true);
+    let userChatClone = userChat;
+    userChatClone = e.currentTarget.elements[0].value;
+    if (!userChatClone) return;
+    setUserChat([userChatClone]);
+    const chatLogClone = chatLog;
+    chatLogClone.push({ id: "user", message: userChatClone });
+    setChatLog(chatLogClone);
+    setIsLoading(true);
+    e.currentTarget.elements[0].value = "";
     train();
   };
 
@@ -96,15 +119,19 @@ function AskCoronaGo() {
     <div className="modal-container" style={style_container}>
       <div style={style_upperRow}>
         {" "}
-        {botChat.map((bChat, index) => (
-          <div key={index} className="chat-card" style={style_chatCardBot}>
-            <p>{bChat}</p>
+        {chatLog.map((chat, index) => (
+          <div
+            key={index}
+            className="chat-card"
+            style={chat.id === "bot" ? style_chatCardBot : style_chatCardUser}
+          >
+            <p>{chat.message}</p>
           </div>
         ))}
         <div style={style_loaderContainer}>
           <div>
             <svg
-              className={showLoading ? "coronaBot-loader" : null}
+              className={isLoading ? "coronaBot-loader" : null}
               style={style_coronaBot}
               fill={theme.colors.primary}
               data-name="Слой 1"
@@ -120,11 +147,17 @@ function AskCoronaGo() {
               <path d="M58.34,76.34a8,8,0,1,0,11.32,0A8,8,0,0,0,58.34,76.34Zm8.49,8.49a4,4,0,1,1,0-5.66A4,4,0,0,1,66.83,84.83Z" />
             </svg>{" "}
           </div>
-          {showLoading && <p>I'm still learning, please be patient.</p>}
+          {isLoading && <p>I'm still learning, please be patient.</p>}
         </div>
+        <div ref={messagesEndRef} />
       </div>
-      <form onSubmit={handleSubmit} style={style_form}>
+      <form
+        className={isLoading ? "form-hide" : "form-show"}
+        onSubmit={handleSubmit}
+        style={style_form}
+      >
         <input
+          disabled={isLoading}
           style={style_askInput}
           type="text"
           name="coronaQuestion"
@@ -132,7 +165,7 @@ function AskCoronaGo() {
           className=""
           onChange={handleChange}
         />
-        <button type="submit" style={style_sendBtn}>
+        <button type="submit" style={style_sendBtn} disabled={isLoading}>
           {" "}
           Send
         </button>
@@ -156,7 +189,7 @@ const style_loaderContainer = {
   display: "flex",
   textAlign: "left",
   fontSize: "16px",
-  margin: "20px 0"
+  margin: "20px 0 30px"
 };
 const style_coronaBot = {
   width: "64px",
