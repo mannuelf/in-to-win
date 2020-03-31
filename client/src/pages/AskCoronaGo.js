@@ -5,20 +5,12 @@ import theme from "../GlobalStyle/Theme";
 
 function AskCoronaGo() {
   const [coronaQuery, setCoronaQuery] = useState("");
-  const [convoRecord, setConvoRecord] = useState([]);
   const [chatLog, setChatLog] = useState([
     {
       id: "bot",
       message: "Hi! I'm an AI based Fact Checker. How can I help you?"
     }
   ]);
-
-  const getUserAndBotConvo = () => {
-    const convoRecordClone = convoRecord;
-    const recorded = chatLog.slice(-2);
-    convoRecordClone.push(recorded);
-    setConvoRecord(convoRecordClone);
-  };
 
   const [userChat, setUserChat] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -28,10 +20,7 @@ function AskCoronaGo() {
     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(getUserAndBotConvo, [chatLog]);
   useEffect(scrollToBottom);
-
-  console.log({ convoRecord });
 
   let trainedNet;
 
