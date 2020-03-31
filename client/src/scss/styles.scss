@@ -44,3 +44,17 @@
 //   text: "#DADADA",
 //   dark: "#333333",
 //   grey: "#3B4046"
+
+.sc-fzoyTs.idAlfe {
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+}
+
+.form-hide {
+  opacity: 0;
+  transition: 0.5s;
+}
+.form-show {
+  opacity: 1;
+  transition: 0.5s;
+}

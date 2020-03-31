@@ -110,10 +110,9 @@ const style_coronaBotBtn = {
   backgroundColor: "transparent",
   border: "none",
   outline: "none",
-  width: "64px",
   position: "fixed",
   bottom: "10rem",
-  right: "3rem",
+  right: "0.8rem",
   zIndex: "11"
 };
 
