@@ -1,6 +1,6 @@
 import React from "react";
 
-function FollowButton({ id, onFollow }) {
+function FollowButton({ id, onFollow, isFollowing }) {
   return (
     <div>
       <button
@@ -8,7 +8,7 @@ function FollowButton({ id, onFollow }) {
         style={style_button}
         onClick={() => onFollow(id)}
       >
-        Follow
+        {isFollowing ? "Unfollow" : "Follow"}
       </button>
     </div>
   );

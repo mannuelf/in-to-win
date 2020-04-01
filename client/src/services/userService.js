@@ -29,13 +29,22 @@ export async function getUserFriendList() {
 export async function getUserFriendsData() {
   const { data: costumersData } = await getAllCostumersData();
   const userFriendList = await getUserFriendList();
-  console.log({ userFriendList });
+  const userFriendListId = userFriendList.map(ufl => ufl.friendNumber);
 
-  function findFriend() {
-    return userFriendList.filter(userFriend => userFriend.friendNumber);
-  }
-
-  const userFriendsData = [costumersData.find(findFriend)];
+  const userFriendsData = costumersData.filter(item =>
+    userFriendListId.includes(item.id.toString())
+  );
 
   return userFriendsData;
+}
+
+export async function removeFriend(friendNumber) {
+  const userFriendList = await getUserFriendList();
+
+  const result = userFriendList.filter(
+    item => item.friendNumber === friendNumber.toString()
+  );
+  const friendArrayId = result[0].id;
+
+  return http.delete(BASE_URL + CUSTOMER_FRIENDS + "/" + friendArrayId);
 }

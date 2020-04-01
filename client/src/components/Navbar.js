@@ -52,7 +52,7 @@ const Navbar = () => {
           <StyledIcon src={DailiesIcon} />
           Dailies
         </StyledLink>
-        <StyledLink to="/search-for-a-friend">
+        <StyledLink to="/friends">
           <StyledIcon src={FriendsIcon} />
           Friends
         </StyledLink>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle/GlobalStyles";
 
 import "././scss/styles.scss";
+import "react-toastify/dist/ReactToastify.css";
 
 import App from "./App";
 import Home from "././pages/Home";
@@ -17,9 +18,10 @@ import APITest from "./pages/APITest";
 import AffiliateSpecific from "./pages/AffiliateSpecific";
 
 import * as serviceWorker from "./serviceWorker";
+import Friends from "./pages/Friends";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <GlobalStyle />
     <Router>
       <App>
@@ -29,6 +31,7 @@ ReactDOM.render(
           <Route path="/affiliatespecific/:id" component={AffiliateSpecific} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
           <Route path="/search-for-a-friend" component={SocialSearch} />
+          <Route path="/friends" component={Friends} />
           <Route path="/leaderboard" component={Leaderboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/fileupload" component={TaskFileUploader} />
@@ -36,7 +39,7 @@ ReactDOM.render(
         </Switch>
       </App>
     </Router>
-  </React.StrictMode>,
+  </>,
   document.getElementById("root")
 );
 

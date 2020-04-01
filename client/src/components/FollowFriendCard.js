@@ -8,6 +8,8 @@ function FollowFriendCard({
   score,
   rank,
   onFollow,
+  onUnfollow,
+  isFollowing,
   id,
   label
 }) {
@@ -27,7 +29,11 @@ function FollowFriendCard({
           </span>
         </div>
       </div>
-      <FollowButton id={id} onFollow={onFollow} />
+      <FollowButton
+        id={id}
+        onFollow={isFollowing ? onUnfollow : onFollow}
+        isFollowing={isFollowing}
+      />
     </div>
   );
 }

@@ -8,10 +8,10 @@ import { IMG_URL } from "./constants/constants";
 import styled from "styled-components";
 import theme from "./GlobalStyle/Theme";
 import Navbar from "./components/Navbar";
-import Toast from "./components/Toast";
 import AskCoronaGo from "././pages/AskCoronaGo";
-
 import Modal from "react-responsive-modal";
+
+import { ToastContainer } from "react-toastify";
 
 const ErrorComp = styled.p``;
 
@@ -51,6 +51,7 @@ function App(props) {
 
   return (
     <div className="App">
+      <ToastContainer autoClose="3000" />
       {isUserLoggedIn && sessionStorage.getItem("JWT") !== null ? (
         <div>
           {/* <Link to="/">Home</Link>

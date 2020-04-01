@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "brain.js": "^2.0.0-alpha.12",
+    "lodash": "^4.17.15",
     "node-sass": "^4.13.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -15,6 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-slidedown": "^2.4.5",
+    "react-toastify": "^5.5.0",
     "styled-components": "^5.0.1"
   },
   "scripts": {
