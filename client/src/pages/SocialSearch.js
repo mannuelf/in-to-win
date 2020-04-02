@@ -9,8 +9,6 @@ import {
 import axios from "axios";
 import FollowFriendCard from "../components/FollowFriendCard";
 import theme from "../GlobalStyle/Theme";
-import Button from "../components/Button";
-import { Link } from "react-router-dom";
 
 function SocialSearch() {
   const [users, setUsers] = useState([]);

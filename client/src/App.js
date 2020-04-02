@@ -2,9 +2,6 @@ import React, { useState } from "react";
 
 import Login from "./pages/Login";
 
-import { Link } from "react-router-dom";
-import { IMG_URL } from "./constants/constants";
-
 import styled from "styled-components";
 import theme from "./GlobalStyle/Theme";
 import Navbar from "./components/Navbar";
@@ -51,7 +48,7 @@ function App(props) {
 
   return (
     <div className="App">
-      <ToastContainer autoClose="3000" />
+      <ToastContainer autoClose={3000} />
       {isUserLoggedIn && sessionStorage.getItem("JWT") !== null ? (
         <div>
           {/* <Link to="/">Home</Link>

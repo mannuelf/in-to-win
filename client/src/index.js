@@ -1,6 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 import GlobalStyle from "./GlobalStyle/GlobalStyles";
 
 import "././scss/styles.scss";
@@ -10,7 +15,6 @@ import App from "./App";
 import Home from "././pages/Home";
 import Affiliate from "././pages/Affiliates";
 import AskCoronaGo from "././pages/AskCoronaGo";
-import SocialSearch from "././pages/SocialSearch";
 import Leaderboard from "././pages/Leaderboard";
 import Profile from "./pages/Profile";
 import TaskFileUploader from "./pages/FileUpload";
@@ -30,8 +34,7 @@ ReactDOM.render(
           <Route path="/affiliates" component={Affiliate} />
           <Route path="/affiliatespecific/:id" component={AffiliateSpecific} />
           <Route path="/ask-corona-go" component={AskCoronaGo} />
-          <Route path="/search-for-a-friend" component={SocialSearch} />
-          <Route path="/friends" component={Friends} />
+          <Route path="/user" component={Friends} />
           <Route path="/leaderboard" component={Leaderboard} />
           <Route path="/profile" component={Profile} />
           <Route path="/fileupload" component={TaskFileUploader} />

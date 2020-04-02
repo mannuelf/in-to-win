@@ -20,11 +20,11 @@ function FollowFriendCard({
       <img src={image} alt={username} style={style_IMG} />
       <div style={style_leftColumn}>
         <div className="userName" style={style_username}>
-          @{username}
+          {username}
         </div>
         <div className="score" style={style_score}>
           {label}:{" "}
-          <span className="yellow-dark-text-" style={style_yellowText}>
+          <span className="yellow-dark-text" style={style_yellowText}>
             {userScore || rank}
           </span>
         </div>

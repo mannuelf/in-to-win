@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 axios.interceptors.response.use(null, error => {
   const expectedError =
@@ -7,7 +8,9 @@ axios.interceptors.response.use(null, error => {
     error.response.status < 500;
 
   if (!expectedError) {
-    alert(error);
+    toast.error(error, {
+      position: toast.POSITION.TOP_CENTER
+    });
   }
 
   return Promise.reject(error);

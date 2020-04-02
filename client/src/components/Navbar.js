@@ -6,7 +6,7 @@ import FriendsIcon from "../assets/icons/svg/people-outline.svg";
 import DailiesIcon from "../assets/icons/svg/calendar-outline.svg";
 import RewardsIcon from "../assets/icons/svg/credit-card-outline.svg";
 import ProfileIcon from "../assets/icons/svg/person-outline.svg";
-const StyledLink = styled(NavLink)`
+export const StyledLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,7 +52,7 @@ const Navbar = () => {
           <StyledIcon src={DailiesIcon} />
           Dailies
         </StyledLink>
-        <StyledLink to="/friends">
+        <StyledLink to="/user/friend-list">
           <StyledIcon src={FriendsIcon} />
           Friends
         </StyledLink>
