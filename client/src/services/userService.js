@@ -14,23 +14,21 @@ export function getAllCostumersFriendList() {
 }
 
 export async function getUserFriendList() {
+  const userData = getUserData();
   const { data: costumersData } = await getAllCostumersData();
   const { data: costumersFriendList } = await getAllCostumersFriendList();
-
-  const userFriendList = costumersFriendList.filter(costumerFriendList =>
-    costumersData.filter(
-      costumersData => costumersData.id === costumerFriendList.userNumber
-    )
+  const userFriendlist = costumersFriendList.filter(
+    cfl => cfl.userNumber === userData.id.toString()
   );
 
-  return userFriendList;
+  return userFriendlist;
 }
 
 export async function getUserFriendsData() {
   const { data: costumersData } = await getAllCostumersData();
   const userFriendList = await getUserFriendList();
   const userFriendListId = userFriendList.map(ufl => ufl.friendNumber);
-
+  console.log({ userFriendList });
   const userFriendsData = costumersData.filter(item =>
     userFriendListId.includes(item.id.toString())
   );
@@ -47,4 +45,12 @@ export async function removeFriend(friendNumber) {
   const friendArrayId = result[0].id;
 
   return http.delete(BASE_URL + CUSTOMER_FRIENDS + "/" + friendArrayId);
+}
+
+export function addFriend(userFollowedId) {
+  const { id } = getUserData();
+  return http.post(BASE_URL + CUSTOMER_FRIENDS, {
+    friendNumber: userFollowedId.toString(),
+    userNumber: id.toString()
+  });
 }

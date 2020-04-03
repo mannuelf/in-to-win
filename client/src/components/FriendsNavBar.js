@@ -1,14 +1,14 @@
 import React from "react";
 import { StyledLink } from "./Navbar";
 
-function FriendsNavBar() {
+function FriendsNavBar({ onClick }) {
   return (
     <div style={style_container}>
-      <StyledLink to="/user/friend-list">
+      <StyledLink to="/user/friend-list" onClick={onClick}>
         <span style={style_heading}>Following</span>
       </StyledLink>
 
-      <StyledLink to="/user/social-search">
+      <StyledLink to="/user/social-search" onClick={onClick}>
         <span style={style_heading}>People to Follow</span>
       </StyledLink>
     </div>

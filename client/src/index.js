@@ -4,6 +4,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
+  BrowserRouter,
   Redirect
 } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle/GlobalStyles";
@@ -25,7 +26,7 @@ import * as serviceWorker from "./serviceWorker";
 import Friends from "./pages/Friends";
 
 ReactDOM.render(
-  <>
+  <BrowserRouter>
     <GlobalStyle />
     <Router>
       <App>
@@ -42,7 +43,7 @@ ReactDOM.render(
         </Switch>
       </App>
     </Router>
-  </>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
 

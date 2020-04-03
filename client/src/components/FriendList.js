@@ -2,11 +2,11 @@ import React from "react";
 import { IMG_URL } from "../constants/constants";
 import FollowFriendCard from "../components/FollowFriendCard";
 
-function FriendList({ friendList, onUnfollow }) {
+function FriendList({ followedUsers, onUnfollow }) {
   return (
     <div style={style_container}>
-      {friendList.length ? (
-        friendList.map(({ profileimage, username, points, id }, index) => {
+      {followedUsers.length ? (
+        followedUsers.map(({ profileimage, username, points, id }, index) => {
           let img;
           profileimage.length > 0
             ? (img = IMG_URL + profileimage[0].url)
