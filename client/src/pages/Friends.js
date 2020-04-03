@@ -24,7 +24,7 @@ const Friends = ({ location }) => {
   const [costumersData, setCostumersData] = useState([]);
   const [currentUserData] = useState(getUserData());
   const [searchValue, setSearchValue] = useState("" && undefined);
-  const [filteredUsersToFollow, setFilteredUsersToFollow] = useState([]);
+  const [filteredUsersToFollow, setFilteredUsersToFollow] = useState(null);
 
   const filteredCostumersData = costumersData.filter(
     data => data.id !== currentUserData.id
@@ -33,7 +33,7 @@ const Friends = ({ location }) => {
   const usersToFollow = filteredCostumersData.filter(
     fcd => !userFriendsId.includes(fcd.id)
   );
-  const unfollowedUsers = filteredUsersToFollow.length
+  const unfollowedUsers = filteredUsersToFollow
     ? filteredUsersToFollow
     : usersToFollow;
 
@@ -130,9 +130,10 @@ const Friends = ({ location }) => {
     setFilteredUsersToFollow(filteredUsersToFollow);
   };
 
-  const resetSearchInput = () => {
+  const clearSearchInput = () => {
     setSearchValue("");
     setFilteredFriends(null);
+    setFilteredUsersToFollow(null);
   };
 
   const path = "/user/social-search";
@@ -140,7 +141,7 @@ const Friends = ({ location }) => {
   return (
     <div style={style_container}>
       <LeaderboardButton />
-      <FriendsNavBar onClick={resetSearchInput} />
+      <FriendsNavBar onClick={clearSearchInput} />
       <InputSearch
         onChange={
           location.pathname === path ? handleSocialSearch : handleFriendSearch

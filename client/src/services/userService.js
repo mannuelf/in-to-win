@@ -15,7 +15,6 @@ export function getAllCostumersFriendList() {
 
 export async function getUserFriendList() {
   const userData = getUserData();
-  const { data: costumersData } = await getAllCostumersData();
   const { data: costumersFriendList } = await getAllCostumersFriendList();
   const userFriendlist = costumersFriendList.filter(
     cfl => cfl.userNumber === userData.id.toString()
@@ -28,7 +27,6 @@ export async function getUserFriendsData() {
   const { data: costumersData } = await getAllCostumersData();
   const userFriendList = await getUserFriendList();
   const userFriendListId = userFriendList.map(ufl => ufl.friendNumber);
-  console.log({ userFriendList });
   const userFriendsData = costumersData.filter(item =>
     userFriendListId.includes(item.id.toString())
   );
