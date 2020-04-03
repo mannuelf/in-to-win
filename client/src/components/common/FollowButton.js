@@ -20,7 +20,8 @@ const style_button = {
   border: "none",
   fontSize: "16px",
   marginTop: "3px",
-  cursor: "pointer"
+  cursor: "pointer",
+  outline: "none"
 };
 
 export default FollowButton;

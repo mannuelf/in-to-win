@@ -5,8 +5,8 @@ import FollowFriendCard from "../components/FollowFriendCard";
 
 function SocialSearch({ onFollow, unfollowedUsers }) {
   return (
-    <div className="App">
-      <div style={style_cardDeck}>
+    <div className="App" style={style_container}>
+      <div>
         {unfollowedUsers ? (
           unfollowedUsers.map((value, key) => {
             let img;
@@ -34,8 +34,8 @@ function SocialSearch({ onFollow, unfollowedUsers }) {
   );
 }
 
-const style_cardDeck = {
-  padding: "32px 0 0"
+const style_container = {
+  margin: "32px 0 0"
 };
 
 export default SocialSearch;

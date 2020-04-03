@@ -14,6 +14,7 @@ const style_searchInput = {
   fontSize: "16px",
   color: `${theme.colors.text}`,
   backgroundColor: "transparent",
+  outline: "none",
   borderTop: "none",
   borderLeft: "none",
   borderRight: "none",
