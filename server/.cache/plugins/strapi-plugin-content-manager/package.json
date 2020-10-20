@@ -1,32 +1,27 @@
 {
-  "_args": [
-    [
-      "strapi-plugin-content-manager@3.0.0-beta.17.5",
-      "C:\\_repos\\in-to-win\\server"
-    ]
-  ],
-  "_from": "strapi-plugin-content-manager@3.0.0-beta.17.5",
-  "_id": "strapi-plugin-content-manager@3.0.0-beta.17.5",
+  "_from": "strapi-plugin-content-manager@3.2.4",
+  "_id": "strapi-plugin-content-manager@3.2.4",
   "_inBundle": false,
-  "_integrity": "sha512-auyPk9bvyNSOcXBkIZv+8zFpdogjxTgvcAlvxwpuXHVg2MC3xyVCPHwxf39M5MHZAofm5me178R6g8wMillYgQ==",
+  "_integrity": "sha512-vq4vDBvA375Z9iRnDZ5MCrk92AR+Vcr4Xk4aph1mQ794yPf2mr8tIyl/N0YkH2qkBMAWD7yYlAFO2BHHhXndUw==",
   "_location": "/strapi-plugin-content-manager",
   "_phantomChildren": {},
   "_requested": {
     "type": "version",
     "registry": true,
-    "raw": "strapi-plugin-content-manager@3.0.0-beta.17.5",
+    "raw": "strapi-plugin-content-manager@3.2.4",
     "name": "strapi-plugin-content-manager",
     "escapedName": "strapi-plugin-content-manager",
-    "rawSpec": "3.0.0-beta.17.5",
+    "rawSpec": "3.2.4",
     "saveSpec": null,
-    "fetchSpec": "3.0.0-beta.17.5"
+    "fetchSpec": "3.2.4"
   },
   "_requiredBy": [
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.0.0-beta.17.5.tgz",
-  "_spec": "3.0.0-beta.17.5",
-  "_where": "C:\\_repos\\in-to-win\\server",
+  "_resolved": "https://registry.npmjs.org/strapi-plugin-content-manager/-/strapi-plugin-content-manager-3.2.4.tgz",
+  "_shasum": "2db8aaff79b93d4041253253e559785bba03de78",
+  "_spec": "strapi-plugin-content-manager@3.2.4",
+  "_where": "/Users/Adminnoroff/workspace/in-to-win/server",
   "author": {
     "name": "Strapi team",
     "email": "hi@strapi.io",
@@ -35,40 +30,56 @@
   "bugs": {
     "url": "https://github.com/strapi/strapi/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {
+    "@buffetjs/core": "3.3.1",
+    "@buffetjs/custom": "3.3.1",
+    "@buffetjs/hooks": "3.3.1",
+    "@buffetjs/icons": "3.3.1",
+    "@buffetjs/styles": "3.3.1",
+    "@buffetjs/utils": "3.3.1",
+    "@sindresorhus/slugify": "1.1.0",
     "classnames": "^2.2.6",
     "codemirror": "^5.46.0",
-    "draft-js": "^0.10.5",
+    "draft-js": "^0.11.5",
+    "highlight.js": "^10.1.1",
     "immutable": "^3.8.2",
-    "invariant": "^2.2.1",
-    "lodash": "^4.17.11",
-    "pluralize": "^7.0.0",
-    "react": "^16.9.0",
+    "lodash": "4.17.19",
+    "markdown-it": "^11.0.1",
+    "markdown-it-abbr": "^1.0.4",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-deflist": "^2.0.3",
+    "markdown-it-emoji": "^1.4.0",
+    "markdown-it-footnote": "^3.0.2",
+    "markdown-it-ins": "^3.0.0",
+    "markdown-it-mark": "^3.0.0",
+    "markdown-it-sub": "^1.0.0",
+    "markdown-it-sup": "^1.0.0",
+    "pluralize": "^8.0.0",
+    "react": "^16.13.1",
     "react-dom": "^16.9.0",
-    "react-intl": "^2.8.0",
+    "react-fast-compare": "^3.2.0",
+    "react-intl": "4.5.0",
     "react-redux": "^7.0.2",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "react-select": "^3.0.4",
-    "react-transition-group": "^2.5.0",
-    "reactstrap": "^5.0.0",
+    "reactstrap": "8.4.1",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
-    "reselect": "^3.0.1",
-    "showdown": "^1.9.0",
-    "strapi-helper-plugin": "3.0.0-beta.17.5",
-    "strapi-utils": "3.0.0-beta.17.5",
-    "styled-components": "^4.2.0",
+    "reselect": "^4.0.0",
+    "strapi-helper-plugin": "3.2.4",
+    "strapi-utils": "3.2.4",
     "yup": "^0.27.0"
   },
+  "deprecated": false,
   "description": "A powerful UI to easily manage your data.",
   "engines": {
-    "node": ">=10.0.0",
+    "node": ">=10.16.0 <=14.x.x",
     "npm": ">=6.0.0"
   },
-  "gitHead": "b2e0ec5d1f33d82c321c03a469832061e9fbca00",
+  "gitHead": "e8153d99c06ad3fb375e750a3d869d9d9441b5c3",
   "homepage": "https://github.com/strapi/strapi#readme",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "maintainers": [
     {
       "name": "Strapi team",
@@ -81,14 +92,11 @@
     "type": "git",
     "url": "git://github.com/strapi/strapi.git"
   },
-  "scripts": {
-    "test": "jest services"
-  },
   "strapi": {
     "name": "Content Manager",
     "icon": "plug",
     "description": "content-manager.plugin.description",
     "required": true
   },
-  "version": "3.0.0-beta.17.5"
+  "version": "3.2.4"
 }

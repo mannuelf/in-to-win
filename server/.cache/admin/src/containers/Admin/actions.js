@@ -4,13 +4,30 @@
  *
  */
 
-import { EMIT_EVENT, SET_APP_ERROR } from './constants';
+import {
+  GET_USER_PERMISSIONS,
+  GET_USER_PERMISSIONS_ERROR,
+  GET_USER_PERMISSIONS_SUCCEEDED,
+  SET_APP_ERROR,
+} from './constants';
 
-export function emitEvent(event, properties) {
+export function getUserPermissions() {
   return {
-    type: EMIT_EVENT,
-    event,
-    properties,
+    type: GET_USER_PERMISSIONS,
+  };
+}
+
+export function getUserPermissionsError(error) {
+  return {
+    type: GET_USER_PERMISSIONS_ERROR,
+    error,
+  };
+}
+
+export function getUserPermissionsSucceeded(data) {
+  return {
+    type: GET_USER_PERMISSIONS_SUCCEEDED,
+    data,
   };
 }
 

@@ -4,12 +4,14 @@
  *
  */
 
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
 import { Switch, Route } from 'react-router-dom';
+import { injectIntl } from 'react-intl';
 import { isEmpty } from 'lodash';
 // Components from strapi-helper-plugin
 import {
@@ -17,39 +19,56 @@ import {
   GlobalContextProvider,
   LoadingIndicatorPage,
   OverlayBlocker,
+  UserProvider,
+  CheckPagePermissions,
+  request,
 } from 'strapi-helper-plugin';
-import { SHOW_TUTORIALS } from '../../config';
+import { SETTINGS_BASE_URL, SHOW_TUTORIALS } from '../../config';
 
+import adminPermissions from '../../permissions';
 import Header from '../../components/Header/index';
-import Logout from '../../components/Logout';
 import NavTopRightWrapper from '../../components/NavTopRightWrapper';
-import ComingSoonPage from '../ComingSoonPage';
 import LeftMenu from '../LeftMenu';
-import ListPluginsPage from '../ListPluginsPage';
+import InstalledPluginsPage from '../InstalledPluginsPage';
 import LocaleToggle from '../LocaleToggle';
 import HomePage from '../HomePage';
-import Marketplace from '../Marketplace';
+import MarketplacePage from '../MarketplacePage';
 import NotFoundPage from '../NotFoundPage';
-import Onboarding from '../Onboarding';
+import OnboardingVideos from '../Onboarding';
+import SettingsPage from '../SettingsPage';
 import PluginDispatcher from '../PluginDispatcher';
+import ProfilePage from '../ProfilePage';
+import Logout from './Logout';
 import {
   disableGlobalOverlayBlocker,
   enableGlobalOverlayBlocker,
   updatePlugin,
 } from '../App/actions';
 import makeSelecApp from '../App/selectors';
-import injectSaga from '../../utils/injectSaga';
-import injectReducer from '../../utils/injectReducer';
-
-import { emitEvent, setAppError } from './actions';
+import {
+  getUserPermissions,
+  getUserPermissionsError,
+  getUserPermissionsSucceeded,
+  setAppError,
+} from './actions';
 import makeSelectAdmin from './selectors';
-import reducer from './reducer';
-import saga from './saga';
 import Wrapper from './Wrapper';
 import Content from './Content';
 
 export class Admin extends React.Component {
   // eslint-disable-line react/prefer-stateless-function
+
+  // Ref to access the menu API
+  menuRef = createRef();
+
+  helpers = {
+    updatePlugin: this.props.updatePlugin,
+  };
+
+  componentDidMount() {
+    this.emitEvent('didAccessAuthenticatedAdministration');
+    this.fetchUserPermissions(true);
+  }
 
   shouldComponentUpdate(prevProps) {
     return !isEmpty(difference(prevProps, this.props));
@@ -69,18 +88,50 @@ export class Admin extends React.Component {
     this.props.setAppError();
   }
 
+  emitEvent = async (event, properties) => {
+    const {
+      global: { uuid },
+    } = this.props;
+
+    if (uuid) {
+      try {
+        await axios.post('https://analytics.strapi.io/track', {
+          event,
+          // PROJECT_TYPE is an env variable defined in the webpack config
+          // eslint-disable-next-line no-undef
+          properties: { ...properties, projectType: PROJECT_TYPE },
+          uuid,
+        });
+      } catch (err) {
+        // Silent
+      }
+    }
+  };
+
+  fetchUserPermissions = async (resetState = false) => {
+    const { getUserPermissions, getUserPermissionsError, getUserPermissionsSucceeded } = this.props;
+
+    if (resetState) {
+      // Show a loader
+      getUserPermissions();
+    }
+
+    try {
+      const { data } = await request('/admin/users/me/permissions', { method: 'GET' });
+
+      getUserPermissionsSucceeded(data);
+    } catch (err) {
+      console.error(err);
+      getUserPermissionsError(err);
+    }
+  };
+
   hasApluginNotReady = props => {
     const {
       global: { plugins },
     } = props;
 
-    return !Object.keys(plugins).every(
-      plugin => plugins[plugin].isReady === true
-    );
-  };
-
-  helpers = {
-    updatePlugin: this.props.updatePlugin,
+    return !Object.keys(plugins).every(plugin => plugins[plugin].isReady === true);
   };
 
   /**
@@ -98,17 +149,16 @@ export class Admin extends React.Component {
 
     return Object.keys(plugins).reduce((acc, current) => {
       const InitializerComponent = plugins[current].initializer;
-      const key = plugins[current].id;
 
-      acc.push(
-        <InitializerComponent key={key} {...this.props} {...this.helpers} />
-      );
+      if (InitializerComponent) {
+        const key = plugins[current].id;
+
+        acc.push(<InitializerComponent key={key} {...this.props} {...this.helpers} />);
+      }
 
       return acc;
     }, []);
   };
-
-  renderMarketPlace = props => <Marketplace {...props} {...this.props} />;
 
   renderPluginDispatcher = props => {
     // NOTE: Send the needed props instead of everything...
@@ -120,98 +170,132 @@ export class Admin extends React.Component {
 
   render() {
     const {
+      admin: { isLoading, userPermissions },
       global: {
+        autoReload,
         blockApp,
+        currentEnvironment,
         overlayBlockerData,
         plugins,
         showGlobalAppBlocker,
         strapiVersion,
       },
+      disableGlobalOverlayBlocker,
+      enableGlobalOverlayBlocker,
+      intl: { formatMessage, locale },
+      updatePlugin,
     } = this.props;
 
     // We need the admin data in order to make the initializers work
     if (this.showLoader()) {
       return (
-        <React.Fragment>
+        <>
           {this.renderInitializers()}
           <LoadingIndicatorPage />
-        </React.Fragment>
+        </>
       );
+    }
+
+    // Show a loader while permissions are being fetched
+    if (isLoading) {
+      return <LoadingIndicatorPage />;
     }
 
     return (
       <GlobalContextProvider
-        emitEvent={this.props.emitEvent}
-        currentEnvironment={this.props.global.currentEnvironment}
-        disableGlobalOverlayBlocker={this.props.disableGlobalOverlayBlocker}
-        enableGlobalOverlayBlocker={this.props.enableGlobalOverlayBlocker}
-        plugins={this.props.global.plugins}
-        updatePlugin={this.props.updatePlugin}
+        autoReload={autoReload}
+        emitEvent={this.emitEvent}
+        currentEnvironment={currentEnvironment}
+        currentLocale={locale}
+        disableGlobalOverlayBlocker={disableGlobalOverlayBlocker}
+        enableGlobalOverlayBlocker={enableGlobalOverlayBlocker}
+        fetchUserPermissions={this.fetchUserPermissions}
+        formatMessage={formatMessage}
+        menu={this.menuRef.current}
+        plugins={plugins}
+        settingsBaseURL={SETTINGS_BASE_URL || '/settings'}
+        updatePlugin={updatePlugin}
       >
-        <Wrapper>
-          <LeftMenu version={strapiVersion} plugins={plugins} />
-          <NavTopRightWrapper>
-            {/* Injection zone not ready yet */}
-            <Logout />
-            <LocaleToggle isLogged />
-          </NavTopRightWrapper>
-          <div className="adminPageRightWrapper">
-            <Header />
-            <Content>
-              <Switch>
-                <Route
-                  path="/"
-                  render={props => this.renderRoute(props, HomePage)}
-                  exact
-                />
-                <Route
-                  path="/plugins/:pluginId"
-                  render={this.renderPluginDispatcher}
-                />
-                <Route path="/plugins" component={ComingSoonPage} />
-                <Route
-                  path="/list-plugins"
-                  render={props => this.renderRoute(props, ListPluginsPage)}
-                  exact
-                />
-                <Route
-                  path="/marketplace"
-                  render={this.renderMarketPlace}
-                  exact
-                />
-                <Route path="/configuration" component={ComingSoonPage} exact />
-                <Route key="7" path="" component={NotFoundPage} />
-                <Route key="8" path="404" component={NotFoundPage} />
-              </Switch>
-            </Content>
-          </div>
-          <OverlayBlocker
-            key="overlayBlocker"
-            isOpen={blockApp && showGlobalAppBlocker}
-            {...overlayBlockerData}
-          />
-          {SHOW_TUTORIALS && <Onboarding />}
-        </Wrapper>
+        <UserProvider value={userPermissions}>
+          <Wrapper>
+            <LeftMenu version={strapiVersion} plugins={plugins} ref={this.menuRef} />
+            <NavTopRightWrapper>
+              {/* Injection zone not ready yet */}
+              <Logout />
+              <LocaleToggle isLogged />
+            </NavTopRightWrapper>
+            <div className="adminPageRightWrapper">
+              <Header />
+              <Content>
+                <Switch>
+                  <Route path="/" render={props => this.renderRoute(props, HomePage)} exact />
+                  <Route path="/me" component={ProfilePage} />
+                  <Route path="/plugins/:pluginId" render={this.renderPluginDispatcher} />
+                  <Route path="/list-plugins" exact>
+                    <CheckPagePermissions permissions={adminPermissions.marketplace.main}>
+                      <InstalledPluginsPage />
+                    </CheckPagePermissions>
+                  </Route>
+                  <Route path="/marketplace">
+                    <CheckPagePermissions permissions={adminPermissions.marketplace.main}>
+                      <MarketplacePage />
+                    </CheckPagePermissions>
+                  </Route>
+                  <Route
+                    path={`${SETTINGS_BASE_URL || '/settings'}/:settingId`}
+                    component={SettingsPage}
+                  />
+                  <Route path={SETTINGS_BASE_URL || '/settings'} component={SettingsPage} exact />
+                  <Route key="7" path="" component={NotFoundPage} />
+                  <Route key="8" path="/404" component={NotFoundPage} />
+                </Switch>
+              </Content>
+            </div>
+            <OverlayBlocker
+              key="overlayBlocker"
+              isOpen={blockApp && showGlobalAppBlocker}
+              {...overlayBlockerData}
+            />
+            {SHOW_TUTORIALS && <OnboardingVideos />}
+          </Wrapper>
+        </UserProvider>
       </GlobalContextProvider>
     );
   }
 }
 
+Admin.defaultProps = {
+  intl: {
+    formatMessage: () => {},
+    locale: 'en',
+  },
+};
+
 Admin.propTypes = {
   admin: PropTypes.shape({
     appError: PropTypes.bool,
+    isLoading: PropTypes.bool,
+    userPermissions: PropTypes.array,
   }).isRequired,
   disableGlobalOverlayBlocker: PropTypes.func.isRequired,
-  emitEvent: PropTypes.func.isRequired,
   enableGlobalOverlayBlocker: PropTypes.func.isRequired,
+  getUserPermissions: PropTypes.func.isRequired,
+  getUserPermissionsError: PropTypes.func.isRequired,
+  getUserPermissionsSucceeded: PropTypes.func.isRequired,
   global: PropTypes.shape({
+    autoReload: PropTypes.bool,
     blockApp: PropTypes.bool,
     currentEnvironment: PropTypes.string,
     overlayBlockerData: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     plugins: PropTypes.object,
     showGlobalAppBlocker: PropTypes.bool,
     strapiVersion: PropTypes.string,
+    uuid: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   }).isRequired,
+  intl: PropTypes.shape({
+    formatMessage: PropTypes.func,
+    locale: PropTypes.string,
+  }),
   location: PropTypes.object.isRequired,
   setAppError: PropTypes.func.isRequired,
   updatePlugin: PropTypes.func.isRequired,
@@ -226,8 +310,10 @@ export function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
       disableGlobalOverlayBlocker,
-      emitEvent,
       enableGlobalOverlayBlocker,
+      getUserPermissions,
+      getUserPermissionsError,
+      getUserPermissionsSucceeded,
       setAppError,
       updatePlugin,
     },
@@ -235,15 +321,6 @@ export function mapDispatchToProps(dispatch) {
   );
 }
 
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-);
-const withReducer = injectReducer({ key: 'admin', reducer });
-const withSaga = injectSaga({ key: 'admin', saga });
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withReducer,
-  withSaga,
-  withConnect
-)(Admin);
+export default compose(injectIntl, withConnect)(Admin);

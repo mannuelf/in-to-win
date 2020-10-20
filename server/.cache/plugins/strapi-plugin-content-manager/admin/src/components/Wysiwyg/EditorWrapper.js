@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-
+/* eslint-disable */
 const EditorWrapper = styled.div`
   ${({ isFullscreen }) => {
     if (isFullscreen) {
@@ -13,6 +13,7 @@ const EditorWrapper = styled.div`
         display: flex;
         background-color: transparent;
         z-index: 99999;
+
         > div {
           min-width: 50%;
         }
@@ -24,6 +25,9 @@ const EditorWrapper = styled.div`
           border-left: 0;
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
+        }
+        .editorWrapper {
+          border-color: #f3f4f4 !important;
         }
       `;
     }
@@ -70,7 +74,8 @@ const EditorWrapper = styled.div`
     font-size: 13px;
     background-color: #fff;
     line-height: 18px !important;
-    cursor: text;
+    cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'text')};
+    color: ${({ disabled }) => (disabled ? '#9ea7b8' : '#333740')};
     overflow: auto;
 
     h1,

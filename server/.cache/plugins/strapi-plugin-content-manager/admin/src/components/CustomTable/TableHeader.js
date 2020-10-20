@@ -1,9 +1,11 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-
-import { useListView } from '../../contexts/ListView';
+import { useGlobalContext } from 'strapi-helper-plugin';
+import useListView from '../../hooks/useListView';
 import CustomInputCheckbox from '../CustomInputCheckbox';
-import { Icon, Thead } from './styledComponents';
+import { Arrow, Thead } from './styledComponents';
+
+/* eslint-disable jsx-a11y/control-has-associated-label */
 
 function TableHeader({ headers, isBulkable }) {
   const {
@@ -11,9 +13,10 @@ function TableHeader({ headers, isBulkable }) {
     entriesToDelete,
     firstSortableElement,
     onChangeBulkSelectall,
-    onChangeParams,
-    searchParams: { _sort },
+    onChangeSearch,
+    _sort,
   } = useListView();
+  const { emitEvent } = useGlobalContext();
   const [sortBy, sortOrder] = _sort.split(':');
 
   return (
@@ -26,29 +29,26 @@ function TableHeader({ headers, isBulkable }) {
               isAll
               name="all"
               onChange={onChangeBulkSelectall}
-              value={
-                data.length === entriesToDelete.length &&
-                entriesToDelete.length > 0
-              }
+              value={data.length === entriesToDelete.length && entriesToDelete.length > 0}
             />
           </th>
         )}
         {headers.map(header => {
           return (
             <th
-              key={header.name}
+              key={header.key || header.name}
               onClick={() => {
                 if (header.sortable) {
+                  emitEvent('didSortEntries');
                   const isCurrentSort = header.name === sortBy;
-                  const nextOrder =
-                    isCurrentSort && sortOrder === 'ASC' ? 'DESC' : 'ASC';
+                  const nextOrder = isCurrentSort && sortOrder === 'ASC' ? 'DESC' : 'ASC';
                   let value = `${header.name}:${nextOrder}`;
 
                   if (isCurrentSort && sortOrder === 'DESC') {
                     value = `${firstSortableElement}:ASC`;
                   }
 
-                  onChangeParams({
+                  onChangeSearch({
                     target: {
                       name: '_sort',
                       value,
@@ -59,17 +59,15 @@ function TableHeader({ headers, isBulkable }) {
             >
               <span className={header.sortable ? 'sortable' : ''}>
                 {header.label}
+
                 {sortBy === header.name && (
-                  <Icon
-                    className="fa fa-sort-asc"
-                    isAsc={sortOrder === 'ASC'}
-                  />
+                  <Arrow fill="#212529" isUp={sortOrder === 'ASC' && 'isAsc'} />
                 )}
               </span>
             </th>
           );
         })}
-        <th></th>
+        <th />
       </tr>
     </Thead>
   );

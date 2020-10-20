@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   position: relative;
-  margin-top: 14px;
-  margin-bottom: -14px;
+  margin-bottom: 3px;
   line-height: 18px;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'initial')};
 
   .CodeMirror {
     font-size: 13px !important;

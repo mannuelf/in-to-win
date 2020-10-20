@@ -3,20 +3,18 @@ import {
   GET_DATA_SUCCEEDED,
   ON_CHANGE_BULK,
   ON_CHANGE_BULK_SELECT_ALL,
-  ON_DELETE_DATA,
+  ON_DELETE_DATA_ERROR,
   ON_DELETE_DATA_SUCCEEDED,
-  ON_DELETE_SEVERAL_DATA,
   ON_DELETE_SEVERAL_DATA_SUCCEEDED,
   RESET_PROPS,
+  SET_MODAL_LOADING_STATE,
   TOGGLE_MODAL_DELETE,
   TOGGLE_MODAL_DELETE_ALL,
 } from './constants';
 
-export function getData(uid, params) {
+export function getData() {
   return {
     type: GET_DATA,
-    uid,
-    params,
   };
 }
 
@@ -28,11 +26,10 @@ export function getDataSucceeded(count, data) {
   };
 }
 
-export function onChangeBulk({ target: { name, value } }) {
+export function onChangeBulk({ target: { name } }) {
   return {
     type: ON_CHANGE_BULK,
     name,
-    value,
   };
 }
 
@@ -42,28 +39,15 @@ export function onChangeBulkSelectall() {
   };
 }
 
-export function onDeleteData(id, uid, source, emitEvent) {
+export function onDeleteDataError() {
   return {
-    type: ON_DELETE_DATA,
-    id,
-    uid,
-    source,
-    emitEvent,
+    type: ON_DELETE_DATA_ERROR,
   };
 }
 
 export function onDeleteDataSucceeded() {
   return {
     type: ON_DELETE_DATA_SUCCEEDED,
-  };
-}
-
-export function onDeleteSeveralData(ids, slug, source) {
-  return {
-    type: ON_DELETE_SEVERAL_DATA,
-    ids,
-    slug,
-    source,
   };
 }
 
@@ -75,6 +59,12 @@ export function onDeleteSeveralDataSucceeded() {
 
 export function resetProps() {
   return { type: RESET_PROPS };
+}
+
+export function setModalLoadingState() {
+  return {
+    type: SET_MODAL_LOADING_STATE,
+  };
 }
 
 export function toggleModalDeleteAll() {

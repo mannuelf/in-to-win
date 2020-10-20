@@ -1,10 +1,11 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { get, isNull } from 'lodash';
-
 import Select from 'react-select';
+import SingleValue from './SingleValue';
 
 function SelectOne({
+  components,
   mainField,
   name,
   isDisabled,
@@ -15,10 +16,12 @@ function SelectOne({
   onMenuScrollToBottom,
   options,
   placeholder,
+  styles,
   value,
 }) {
   return (
     <Select
+      components={{ ...components, SingleValue }}
       id={name}
       isClearable
       isDisabled={isDisabled}
@@ -29,18 +32,19 @@ function SelectOne({
       onMenuClose={onMenuClose}
       onMenuScrollToBottom={onMenuScrollToBottom}
       placeholder={placeholder}
-      value={
-        isNull(value) ? null : { label: get(value, [mainField], ''), value }
-      }
+      styles={styles}
+      value={isNull(value) ? null : { label: get(value, [mainField], ''), value }}
     />
   );
 }
 
 SelectOne.defaultProps = {
+  components: {},
   value: null,
 };
 
 SelectOne.propTypes = {
+  components: PropTypes.object,
   isDisabled: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool.isRequired,
   mainField: PropTypes.string.isRequired,
@@ -51,6 +55,7 @@ SelectOne.propTypes = {
   onMenuScrollToBottom: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   placeholder: PropTypes.node.isRequired,
+  styles: PropTypes.object.isRequired,
   value: PropTypes.object,
 };
 
